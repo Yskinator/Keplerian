@@ -12,9 +12,9 @@ package keplerian.physics;
  */
 class Vector3d {
     
-    private double x;
-    private double y;
-    private double z;
+    public double x;
+    public double y;
+    public double z;
     
     public Vector3d(double x, double y, double z)
     {
@@ -40,6 +40,15 @@ class Vector3d {
         double z = u.x*v.y - u.y*v.x;
         
         return new Vector3d(x,y,z);
+    }
+    
+    public static double dotProduct(Vector3d u, Vector3d v)
+    {
+        double x = u.x*v.x;
+        double y = u.y*v.y;
+        double z = u.z*v.z;
+        
+        return x+y+z;
     }
     
     public double magn()

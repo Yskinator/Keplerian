@@ -15,32 +15,32 @@ class Orbit {
     /**
      * Eccentricity.
      */
-    private float e;
+    private double e;
     
     /**
      * Semi-major axis.
      */
-    private float a;
+    private double a;
     
     /**
      * Inclination.
      */ 
-    private float i;
+    private double i;
     
     /**
      * Longitude of the ascending node, usually marked as capital omega.
      */
-    private float om;
+    private double om;
     
     /**
      * Argument of the periapsis, usually marked as lower care omega.
      */
-    private float w;
+    private double w;
     
     /**
-     * Mean anomaly.
+     * True anomaly.
      */
-    private float M0;
+    private double v;
     
     /**
      * Constructs a new orbit.
@@ -49,16 +49,16 @@ class Orbit {
      * @param i
      * @param om
      * @param w
-     * @param M0 
+     * @param v 
      */
-    public Orbit(float e, float a, float i, float om, float w, float M0)
+    public Orbit(double e, double a, double i, double om, double w, double v)
     {
         this.e = e;
         this.a = a;
         this.i = i;
         this.om = om;
         this.w = w;
-        this.M0 = M0;
+        this.v = v;
     }
     
     
