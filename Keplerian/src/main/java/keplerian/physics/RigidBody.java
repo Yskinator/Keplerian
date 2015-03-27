@@ -14,8 +14,8 @@ public class RigidBody {
     
     private float mass;
     private Orbit orbit;
-    private Vector2d relVel;
-    private Vector2d relPos;
+    private Vector3d relVel;
+    private Vector3d relPos;
     private CelestialBody parent;
     
     private static final Orbit NO_ORBIT = null;
@@ -27,7 +27,7 @@ public class RigidBody {
      * @param vel
      * @param parent 
      */
-    public RigidBody(int mass, Vector2d pos, Vector2d vel, CelestialBody parent)
+    public RigidBody(int mass, Vector3d pos, Vector3d vel, CelestialBody parent)
     {
         this.mass = mass;
         this.relPos = pos;
@@ -88,14 +88,14 @@ public class RigidBody {
     /**
      * @return the relVel
      */
-    public Vector2d getRelVel() {
+    public Vector3d getRelVel() {
         return relVel;
     }
 
     /**
      * @return the relPos
      */
-    public Vector2d getRelPos() {
+    public Vector3d getRelPos() {
         return relPos;
     }
 

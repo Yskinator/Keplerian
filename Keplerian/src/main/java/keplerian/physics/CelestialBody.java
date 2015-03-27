@@ -12,7 +12,7 @@ package keplerian.physics;
  */
 public class CelestialBody extends RigidBody {
 
-    public CelestialBody(int mass, Vector2d pos, Vector2d vel, CelestialBody parent) {
+    public CelestialBody(int mass, Vector3d pos, Vector3d vel, CelestialBody parent) {
         super(mass, pos, vel, parent);
     }
     
