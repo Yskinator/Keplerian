@@ -45,7 +45,7 @@ public class RigidBody {
     public static final CelestialBody NO_PARENT = null;
     
     /**
-     * Creates a new RigidBody based on position and velocity. Calculates Orbit.
+     * Creates a new RigidBody based on position and velocity.
      * @param mass Mass of the object.
      * @param relPos Position of the object relative to the parent.
      * @param relVel Velocity of the object relative to the parent.
@@ -56,8 +56,9 @@ public class RigidBody {
         this.mass = mass;
         this.relPos = relPos;
         this.relVel = relVel;
+        this.parent = parent;
         
-        this.toRails();
+        this.orbit = NO_ORBIT;
     }
     
     /**
@@ -70,6 +71,7 @@ public class RigidBody {
     {
         this.mass = mass;
         this.orbit = orbit;
+        this.parent = parent;
     }
     
     /**
