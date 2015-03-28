@@ -16,12 +16,14 @@ public class CelestialBody extends RigidBody {
      * Constructs a new CelestialBody. Note that all celestial bodies will be in orbit or stationary,
      * so only the orbit based constructor is needed.
      * @param mass Mass of the object.
+     * @param facing The direction the object is facing towards.
+     * @param angularVelocity Angular velocity of the object.
      * @param orbit Orbit of the object.
      * @param parent The celestial body the object is orbiting around.
      */
-    public CelestialBody(int mass, Orbit orbit, CelestialBody parent)
+    public CelestialBody(int mass, Vector3d facing, Vector3d angularVelocity, Orbit orbit, CelestialBody parent)
     {
-        super(mass, orbit, parent);
+        super(mass, facing, angularVelocity, orbit, parent);
     }
     
 }

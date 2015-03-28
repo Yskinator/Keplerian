@@ -28,6 +28,17 @@ public class RigidBody {
     private Vector3d relPos;
     
     /**
+     * The direction the object is facing.
+     */
+    private Vector3d facing;
+    
+    
+    /**
+     * The angular velocity of the object.
+     */
+    private Vector3d angularVelocity;
+    
+    /**
      * Parent of the object, in other words whatever the celestial body it is currently orbitting.
      */
     private CelestialBody parent;
@@ -49,13 +60,17 @@ public class RigidBody {
      * @param mass Mass of the object.
      * @param relPos Position of the object relative to the parent.
      * @param relVel Velocity of the object relative to the parent.
+     * @param facing The direction the object is facing towards.
+     * @param angularVelocity Angular velocity of the object.
      * @param parent The celestial body the object is orbiting around.
      */
-    public RigidBody(int mass, Vector3d relPos, Vector3d relVel, CelestialBody parent)
+    public RigidBody(int mass, Vector3d relPos, Vector3d relVel, Vector3d facing, Vector3d angularVelocity, CelestialBody parent)
     {
         this.mass = mass;
         this.relPos = relPos;
         this.relVel = relVel;
+        this.facing = facing;
+        this.angularVelocity = angularVelocity;
         this.parent = parent;
         
         this.orbit = NO_ORBIT;
@@ -64,12 +79,16 @@ public class RigidBody {
     /**
      * Creates a new RigidBody based on an existing orbit.
      * @param mass Mass of the object.
+     * @param facing The direction the object is facing towards.
+     * @param angularVelocity The angular velocity of the object.
      * @param orbit The orbit the object is currently on.
      * @param parent The celestial body the object is orbiting around.
      */
-    public RigidBody(int mass, Orbit orbit, CelestialBody parent)
+    public RigidBody(int mass, Vector3d facing, Vector3d angularVelocity, Orbit orbit, CelestialBody parent)
     {
         this.mass = mass;
+        this.facing = facing;
+        this.angularVelocity = angularVelocity;
         this.orbit = orbit;
         this.parent = parent;
     }
@@ -134,5 +153,20 @@ public class RigidBody {
      */
     public CelestialBody getParent() {
         return parent;
+    }
+
+
+    /**
+     * @return the facing
+     */
+    public Vector3d getFacing() {
+        return facing;
+    }
+
+    /**
+     * @return the angularVelocity
+     */
+    public Vector3d getAngularVelocity() {
+        return angularVelocity;
     }
 }
