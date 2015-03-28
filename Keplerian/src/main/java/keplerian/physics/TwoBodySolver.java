@@ -24,6 +24,12 @@ public class TwoBodySolver {
     public static Orbit findOrbit(double m, Vector3d r, Vector3d vel)
     {
         double e;
+        double a;
+        double p;
+        double i;
+        double om;
+        double w;
+        double v;
         
         double G = 6.673e-11;
         double mu = m*G;
@@ -43,8 +49,7 @@ public class TwoBodySolver {
         //Specific mechanical energy
         double E = vel.magn()*vel.magn()/2 - mu/r.magn();
         
-        double a;
-        double p;
+
         if(e!=1)
         {
             a = (-mu)/(2*E);
@@ -56,12 +61,25 @@ public class TwoBodySolver {
             p = (h.magn()*h.magn())/mu;
         }
         
-        double i = Math.acos((new Vector3d(0,0,h.z)).magn()/h.magn());
-        double om = Math.acos((new Vector3d(n.x,0,0)).magn()/n.magn());
-        double w = (Vector3d.dotProduct(n, ev))/(n.magn()*ev.magn());
+        i = Math.acos((new Vector3d(0,0,h.z)).magn()/h.magn());
+        om = Math.acos((new Vector3d(n.x,0,0)).magn()/n.magn());
+        w = (Vector3d.dotProduct(n, ev))/(n.magn()*ev.magn());
         
         //true anomaly
-        double v = Math.acos(Vector3d.dotProduct(ev, r)/(ev.magn()*r.magn()));
+        v = Math.acos(Vector3d.dotProduct(ev, r)/(ev.magn()*r.magn()));
+        
+        if(n.y < 0)
+        {
+            om = 2*Math.PI - om;
+        }
+        if((new Vector3d(0,0,ev.z).magn()) < 0)
+        {
+            w = 2*Math.PI - w;
+        }
+        if(Vector3d.dotProduct(r, vel) < 0)
+        {
+            v = 2*Math.PI - v;
+        }
         
         return new Orbit(e,a,i,om,w,v);
         
