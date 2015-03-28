@@ -23,6 +23,11 @@ class Vector3d {
         this.z = z;
     }
     
+    public Vector3d unitVector()
+    {
+        return Vector3d.mul(1/this.magn(), this);
+    }
+    
     public static Vector3d mul(double a, Vector3d b)
     {
         return new Vector3d(a*b.x, a*b.y, a*b.z);
