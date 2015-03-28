@@ -39,6 +39,7 @@ public class TwoBodySolver {
         
         //Node vector
         Vector3d n = Vector3d.crossProduct(h, new Vector3d(0,0,1));
+        n = n.unitVector();
         
         //Eccetricity vector
         Vector3d ev = Vector3d.mul((vel.magn()*vel.magn()-mu/r.magn()),r);
