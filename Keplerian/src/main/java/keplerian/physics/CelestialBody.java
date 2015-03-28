@@ -7,8 +7,8 @@
 package keplerian.physics;
 
 /**
- *
- * @author villtann
+ * Represents a celestial body with its own gravitational pull. Unfinished.
+ * @author Ville-Matti Tanninen
  */
 public class CelestialBody extends RigidBody {
 
@@ -16,9 +16,9 @@ public class CelestialBody extends RigidBody {
         super(mass, pos, vel, parent);
     }
     
-    public CelestialBody(int mass, Orbit orbit)
+    public CelestialBody(int mass, Orbit orbit, CelestialBody parent)
     {
-        super(mass, orbit);
+        super(mass, orbit, parent);
     }
     
 }

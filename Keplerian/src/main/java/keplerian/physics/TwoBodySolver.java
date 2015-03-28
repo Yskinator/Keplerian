@@ -1,28 +1,28 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package keplerian.physics;
 
-import org.jsfml.system.Vector2f;
 
 /**
- *
- * @author villtann
+ * Responsible for solving the two body problem to find the orbital elements.
+ * @author Ville-Matti Tanninen
  */
 public class TwoBodySolver {
     
+    final static float G = 6.673e-11f;
+    
     /**
      * Calculates the orbit.
+     * 
+     * Note that orbits where eccentricity or inclination are close to zero will cause issues, or more
+     * specifically, singularities. For those cases something like mean longitude should be used isntead.
      * @param m Mass of the parent object, used to calculate the gravitational pull.
-     * @param r
-     * @param vel
-     * @return
+     * @param r Position of the object.
+     * @param vel Velocity of the object
+     * @return Orbit of the object.
      */
     public static Orbit findOrbit(double m, Vector3d r, Vector3d vel)
     {
+        //The orbital elements
         double e;
         double a;
         double p;
@@ -31,7 +31,6 @@ public class TwoBodySolver {
         double w;
         double v;
         
-        double G = 6.673e-11;
         double mu = m*G;
         
         //Angular momentum.
@@ -65,10 +64,9 @@ public class TwoBodySolver {
         i = Math.acos((new Vector3d(0,0,h.z)).magn()/h.magn());
         om = Math.acos((new Vector3d(n.x,0,0)).magn()/n.magn());
         w = (Vector3d.dotProduct(n, ev))/(n.magn()*ev.magn());
-        
-        //true anomaly
         v = Math.acos(Vector3d.dotProduct(ev, r)/(ev.magn()*r.magn()));
         
+        //Special cases
         if(n.y < 0)
         {
             om = 2*Math.PI - om;

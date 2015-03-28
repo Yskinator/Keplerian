@@ -1,65 +1,93 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 
 package keplerian.physics;
 
 /**
- *
- * @author villtann
+ * Represents a rigid body.
+ * @author Ville-Matti Tanninen
  */
 public class RigidBody {
     
+    /**
+     * The mass of the object.
+     */
     private float mass;
+    
+    /**
+     * Current orbit of the object.
+     */
     private Orbit orbit;
+    
+    /**
+     * Current velocity of the object, relative to the parent object.
+     */
     private Vector3d relVel;
+    
+    /**
+     * Current position of the object, relative to the parent object.
+     */
     private Vector3d relPos;
+    
+    /**
+     * Parent of the object, in other words whatever the celestial body it is currently orbitting.
+     */
     private CelestialBody parent;
     
-    private static final Orbit NO_ORBIT = null;
+    /**
+     * Constant used when object does not have an orbit, for instance when moving between
+     * spheres of influence or accelerating.
+     */
+    public static final Orbit NO_ORBIT = null;
+    
+    /**
+     * Constant used when object does not have a parent. Will be used for stationary objects, namely the
+     * object everything else is orbiting around.
+     */
+    public static final CelestialBody NO_PARENT = null;
     
     /**
      * Creates a new RigidBody based on position and velocity. Calculates Orbit.
-     * @param mass
-     * @param pos
-     * @param vel
-     * @param parent 
+     * @param mass Mass of the object.
+     * @param relPos Position of the object relative to the parent.
+     * @param relVel Velocity of the object relative to the parent.
+     * @param parent The celestial body the object is orbiting around.
      */
-    public RigidBody(int mass, Vector3d pos, Vector3d vel, CelestialBody parent)
+    public RigidBody(int mass, Vector3d relPos, Vector3d relVel, CelestialBody parent)
     {
         this.mass = mass;
-        this.relPos = pos;
-        this.relVel = vel;
+        this.relPos = relPos;
+        this.relVel = relVel;
         
         this.toRails();
     }
     
     /**
      * Creates a new RigidBody based on an existing orbit.
-     * @param mass
-     * @param orbit 
+     * @param mass Mass of the object.
+     * @param orbit The orbit the object is currently on.
+     * @param parent The celestial body the object is orbiting around.
      */
-    public RigidBody(int mass, Orbit orbit)
+    public RigidBody(int mass, Orbit orbit, CelestialBody parent)
     {
         this.mass = mass;
         this.orbit = orbit;
     }
     
     /**
-     * Calculates the orbit.
+     * Places the object in orbit.
      */
     public void toRails()
     {
-        float m = parent.getMass();
-        this.orbit = TwoBodySolver.findOrbit(m, relPos, relVel);
+        float mParent = parent.getMass();
+        this.orbit = TwoBodySolver.findOrbit(mParent, relPos, relVel);
     }
-    
-    public void offRails()
+    /**
+     * Removes the object from orbit and finds its velocity and position.
+     * @param t The current time. Needed to calculate the position and velocity.
+     */
+    public void offRails(float t)
     {
-        relVel = orbit.findOrbitalVelocity();
-        relPos = orbit.findPosition();
+        relVel = orbit.findOrbitalVelocity(t);
+        relPos = orbit.findPosition(t);
         
         this.orbit = NO_ORBIT;
     }

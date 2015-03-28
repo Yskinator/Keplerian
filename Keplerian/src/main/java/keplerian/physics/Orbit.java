@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 
 package keplerian.physics;
 
 /**
- *
- * @author villtann
+ * Represents an orbit around a celestial body.
+ * @author Ville-Matti Tanninen
  */
 class Orbit {
     
@@ -44,12 +40,12 @@ class Orbit {
     
     /**
      * Constructs a new orbit.
-     * @param e
-     * @param a
-     * @param i
-     * @param om
-     * @param w
-     * @param v 
+     * @param e Eccentricity
+     * @param a Semi-major axis.
+     * @param i Inclination
+     * @param om Longitude of the ascending node
+     * @param w Argument of the periapsis.
+     * @param v True anomaly.
      */
     public Orbit(double e, double a, double i, double om, double w, double v)
     {
@@ -61,13 +57,22 @@ class Orbit {
         this.v = v;
     }
     
-    
-    public Vector3d findOrbitalVelocity()
+    /**
+     * Calculates the velocity of the object at the given time.
+     * @param t Time.
+     * @return Velocity of the object.
+     */
+    public Vector3d findOrbitalVelocity(float t)
     {
         throw new UnsupportedOperationException();
     }
     
-    public Vector3d findPosition()
+    /**
+     * Calculates the position of the object at the given time.
+     * @param t Time.
+     * @return Position of the object.
+     */
+    public Vector3d findPosition(float t)
     {
         throw new UnsupportedOperationException();
     }
