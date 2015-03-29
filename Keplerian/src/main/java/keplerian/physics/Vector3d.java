@@ -137,4 +137,10 @@ public class Vector3d {
     {
         return new Vector3d(u.x-v.x, u.y-v.y, u.z-v.z);
     }
+    
+    @Override
+    public String toString()
+    {
+        return "("+this.x+", " + this.y + ", " + this.z + ")";
+    }
 }
