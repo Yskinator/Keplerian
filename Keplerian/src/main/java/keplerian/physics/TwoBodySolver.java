@@ -42,6 +42,8 @@ public class TwoBodySolver {
         
         //Eccetricity vector
         Vector3d ev = Vector3d.mul((vel.magn()*vel.magn()-mu/r.magn()),r);
+        ev = Vector3d.sub(ev, Vector3d.mul(Vector3d.dotProduct(r, vel), vel));
+        ev = Vector3d.div(ev, mu);
         
         //Eccentricity
         e = ev.magn();
