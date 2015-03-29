@@ -6,7 +6,7 @@ package keplerian.physics;
  * New operations are implemented as they are needed.
  * @author Ville-Matti Tanninen
  */
-class Vector3d {
+public class Vector3d {
     
     /**
      * Vector's x coordinate.
@@ -67,6 +67,17 @@ class Vector3d {
     }
     
     /**
+     * Divides the vector with the scalar.
+     * @param vec Vector,
+     * @param scal Scalar.
+     * @return Vector divided by scalar.
+     */
+    public static Vector3d div(Vector3d vec, double scal)
+    {
+        return new Vector3d(vec.x/scal, vec.y/scal, vec.z/scal);
+    }
+    
+    /**
      * Calculates the cross product of the two vectors.
      * @param u Vector number one.
      * @param v Vector number two.
@@ -103,5 +114,27 @@ class Vector3d {
     public double magn()
     {
         return Math.sqrt(x*x + y*y + z*z);
+    }
+    
+    /**
+     * Sums two vectors together.
+     * @param u Vector one.
+     * @param v Vector two.
+     * @return Vector one + vector two.
+     */
+    public static Vector3d sum(Vector3d u, Vector3d v)
+    {
+        return new Vector3d(u.x+v.x, u.y+v.y, u.z+v.z);
+    }
+    
+    /**
+     * Subtracts vector two from vector one.
+     * @param u Vector one.
+     * @param v Vector two.
+     * @return Vector one - Vector two.
+     */
+    public static Vector3d sub(Vector3d u, Vector3d v)
+    {
+        return new Vector3d(u.x-v.x, u.y-v.y, u.z-v.z);
     }
 }
