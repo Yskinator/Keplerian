@@ -6,7 +6,7 @@ package keplerian.physics;
  * Represents an orbit around a celestial body.
  * @author Ville-Matti Tanninen
  */
-class Orbit {
+public class Orbit {
     
     /**
      * Eccentricity.
@@ -75,5 +75,12 @@ class Orbit {
     public Vector3d findPosition(float t)
     {
         throw new UnsupportedOperationException();
+    }
+    
+    @Override
+    public String toString()
+    {
+        String s = "e: " + e + " a: " + a + " i: " + i + " om: " + om + " w: " + w + " v: " + v;
+        return s;
     }
 }
