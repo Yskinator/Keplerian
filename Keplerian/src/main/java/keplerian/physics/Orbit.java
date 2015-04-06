@@ -80,7 +80,49 @@ public class Orbit {
     @Override
     public String toString()
     {
-        String s = "e: " + e + " a: " + a + " i: " + i + " om: " + om + " w: " + w + " v: " + v;
+        String s = "e: " + getE() + " a: " + getA() + " i: " + getI() + " om: " + getOm() + " w: " + getW() + " v: " + getV();
         return s;
+    }
+
+    /**
+     * @return the e
+     */
+    public double getE() {
+        return e;
+    }
+
+    /**
+     * @return the a
+     */
+    public double getA() {
+        return a;
+    }
+
+    /**
+     * @return the i
+     */
+    public double getI() {
+        return i;
+    }
+
+    /**
+     * @return the om
+     */
+    public double getOm() {
+        return om;
+    }
+
+    /**
+     * @return the w
+     */
+    public double getW() {
+        return w;
+    }
+
+    /**
+     * @return the v
+     */
+    public double getV() {
+        return v;
     }
 }
