@@ -14,7 +14,7 @@ public class TwoBodySolver {
      * Calculates the orbit.
      * 
      * Note that orbits where eccentricity or inclination are close to zero will cause issues, or more
-     * specifically, singularities. For those cases something like mean longitude should be used isntead.
+     * specifically, singularities. For those cases something like mean longitude should be used instead.
      * @param m Mass of the parent object, used to calculate the gravitational pull.
      * @param r Position of the object.
      * @param vel Velocity of the object

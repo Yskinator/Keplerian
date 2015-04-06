@@ -1,7 +1,6 @@
 package keplerian;
 
 import java.util.Scanner;
-import keplerian.physics.CelestialBody;
 import keplerian.physics.Orbit;
 import keplerian.physics.TwoBodySolver;
 import keplerian.physics.Vector3d;
