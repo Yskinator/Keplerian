@@ -19,4 +19,9 @@ public interface UserInterface {
      * @param entities List of things the user might want to know about.
      */
     public void show(ArrayList<Entity> entities);
+    
+    /**
+     * Somehow gets input from the user.
+     */
+    public void getInput();
 }
