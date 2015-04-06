@@ -25,7 +25,6 @@ public class TwoBodySolver {
         //The orbital elements
         double e;
         double a;
-        double p;
         double i;
         double om;
         double w;
@@ -33,57 +32,197 @@ public class TwoBodySolver {
         
         double mu = m*G;
         
-        //Angular momentum.
-        Vector3d h = Vector3d.crossProduct(r, vel);
+        Vector3d h = findAngularMomentum(r, vel);
+        Vector3d n = findNodeVector(h);
         
-        //Node vector
-        Vector3d n = Vector3d.crossProduct(h, new Vector3d(0,0,1));
-        n = n.unitVector();
+        Vector3d ev = findEccentricityVector(vel,   mu, r);
+        double E = findSpecificMechanicalEnergy(vel, mu, r);
         
-        //Eccetricity vector
-        Vector3d ev = Vector3d.mul((vel.magn()*vel.magn()-mu/r.magn()),r);
-        ev = Vector3d.sub(ev, Vector3d.mul(Vector3d.dotProduct(r, vel), vel));
-        ev = Vector3d.div(ev, mu);
+        e = findEccentricity(ev);
+        a = findSemiMajorAxis(e, mu, E);
+        i = findInclination(h);
+        om = findLongitudeOfAscendingNode(n);
+        w = findArgumentOfPeriapsis(n, ev);
+        v = findTrueAnomaly(ev, r, vel);
         
-        //Eccentricity
-        e = ev.magn();
         
-        //Specific mechanical energy
-        double E = vel.magn()*vel.magn()/2 - mu/r.magn();
+        return new Orbit(e,a,i,om,w,v);
         
+    }
 
-        if(e!=1)
-        {
-            a = (-mu)/(2*E);
-            p = a*(1-e*e);
-        }
-        else
-        {
-            a = Double.POSITIVE_INFINITY;
-            p = (h.magn()*h.magn())/mu;
-        }
-        
-        i = Math.acos((new Vector3d(0,0,h.z)).magn()/h.magn());
-        om = Math.acos((new Vector3d(n.x,0,0)).magn()/n.magn());
+    /**
+     * Calculates the specific mechanical energy.
+     * 
+     * Used when calculating semi-major axis.
+     * @param vel Velocity.
+     * @param mu m*G.
+     * @param r Position.
+     * @return Specific mechanical energy.
+     */
+    private static double findSpecificMechanicalEnergy(Vector3d vel, double mu, Vector3d r) {
+        double E = vel.magn()*vel.magn()/2 - mu/r.magn();
+        return E;
+    }
+
+    /**
+     * Calculates argument of the periapsis, one of the orbital elements.
+     * @param n Node vector.
+     * @param ev Eccentricity vector.
+     * @return Argument of the periapsis.
+     */
+    private static double findArgumentOfPeriapsis(Vector3d n, Vector3d ev) {
+        double w;
         w = (Vector3d.dotProduct(n, ev))/(n.magn()*ev.magn());
-        v = Math.acos(Vector3d.dotProduct(ev, r)/(ev.magn()*r.magn()));
         
-        //Special cases
-        if(n.y < 0)
-        {
-            om = 2*Math.PI - om;
-        }
         if((new Vector3d(0,0,ev.z).magn()) < 0)
         {
             w = 2*Math.PI - w;
         }
+        
+        return w;
+    }
+
+    /**
+     * Calculates true anomaly, one of the orbital elements.
+     * @param ev Eccentricity vector.
+     * @param r Position.
+     * @param vel Velocity.
+     * @return True anomaly.
+     */
+    private static double findTrueAnomaly(Vector3d ev, Vector3d r, Vector3d vel) {
+        double v;
+        v = Math.acos(Vector3d.dotProduct(ev, r)/(ev.magn()*r.magn()));
+        
         if(Vector3d.dotProduct(r, vel) < 0)
         {
             v = 2*Math.PI - v;
         }
         
-        return new Orbit(e,a,i,om,w,v);
+        return v;
+    }
+
+    /**
+     * Calculates eccentricity, one of the orbital elements.
+     * @param ev Eccentricity vector.
+     * @return Eccentricity.
+     */
+    private static double findEccentricity(Vector3d ev) {
+        double e;
+        //Eccentricity
+        e = ev.magn();
+        return e;
+    }
+
+    /**
+     * Calculates the angular momentum.
+     * 
+     * Used when calculating inclination and node vector..
+     * @param r Position.
+     * @param vel Velocity.
+     * @return Angular momentum.
+     */
+    private static Vector3d findAngularMomentum(Vector3d r, Vector3d vel) {
+        Vector3d h = Vector3d.crossProduct(r, vel);
+        return h;
+    }
+
+    /**
+     * Calculates the node vector.
+     * 
+     * Used when calculating argument of the periapsis and argument of the longitude.
+     * @param h Angular momentum.
+     * @return Node vector.
+     */
+    private static Vector3d findNodeVector(Vector3d h) {
+        Vector3d n = findAngularMomentum(h, new Vector3d(0,0,1));
+        n = n.unitVector();
+        return n;
+    }
+
+    /**
+     * Calculates the semi-latus rectum.
+     * 
+     * Can be used when calculating position and velocity from the orbital parameters.
+     * @param e Eccentricity.
+     * @param a Semi-major axis.
+     * @param h Angular momentum.
+     * @param mu m*G.
+     * @return Semi-latus rectum.
+     */
+    private static double findSemiLatusRectum(double e, double a, Vector3d h, double mu) {
+        double p;
+        if(e!=1)
+        {
+            p = a*(1-e*e);
+        }
+        else
+        {
+            p = (h.magn()*h.magn())/mu;
+        }
+        return p;
+    }
+
+    /**
+     * Calculates the semi-major axis, one of the orbital elements.
+     * @param e Eccentricity.
+     * @param mu m*G.
+     * @param E Specific mechanical energy.
+     * @return Semi-major axis.
+     */
+    private static double findSemiMajorAxis(double e, double mu, double E) {
+        double a;
+        if(e!=1)
+        {
+            a = (-mu)/(2*E);
+        }
+        else
+        {
+            a = Double.POSITIVE_INFINITY;
+        }
+        return a;
+    }
+
+    /**
+     * Calculates the longitude of the ascending node, one of the orbital elements.
+     * @param n Node vector.
+     * @return Longitude of the ascending node.
+     */
+    private static double findLongitudeOfAscendingNode(Vector3d n) {
+        double om;
+        om = Math.acos((new Vector3d(n.x,0,0)).magn()/n.magn());
         
+        if(n.y < 0)
+        {
+            om = 2*Math.PI - om;
+        }
+        
+        return om;
+    }
+
+    /**
+     * Calculates the inclination, one of the orbital elements.
+     * @param h Angular momentum.
+     * @return Inclination.
+     */
+    private static double findInclination(Vector3d h) {
+        double i;
+        i = Math.acos((new Vector3d(0,0,h.z)).magn()/h.magn());
+        return i;
+    }
+
+    /**
+     * Calculates eccentricity, one of the orbital elements.
+     * @param vel Velocity.
+     * @param mu m*G.
+     * @param r Position.
+     * @return Eccentricity.
+     */
+    private static Vector3d findEccentricityVector(Vector3d vel, double mu, Vector3d r) {
+        //Eccetricity vector
+        Vector3d ev = Vector3d.mul((vel.magn()*vel.magn()-mu/r.magn()),r);
+        ev = Vector3d.sub(ev, Vector3d.mul(Vector3d.dotProduct(r, vel), vel));
+        ev = Vector3d.div(ev, mu);
+        return ev;
     }
     
 }
