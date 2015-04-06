@@ -102,6 +102,9 @@ public class TwoBodySolverTest {
         return roundA.equals(roundB);
     }
     
+    /**
+     * Tests whether or not eccentricity is calculated correctly for non-equatorial orbits.
+     */
     @Test
     public void nonEquatorialEccentricity()
     {
@@ -109,9 +112,84 @@ public class TwoBodySolverTest {
        eResult = resultOrbits.get(0).getE();
        eCorrect = correctOrbits.get(0).getE();
        
-       String error = "Eccentricity calculated incorrectly. m = " + masses.get(0) + ", r = " + positions.get(0) + ", vel = " + velocities.get(0);
+       String error = "Eccentricity calculated incorrectly. Received " + eResult + ", expected " + eCorrect;
        
        assertTrue(error, closeEnough(eResult,eCorrect));
+    }
+    
+    /**
+     * Tests whether or not semi-major axis is calculated correctly for non-equatorial orbits.
+     */
+    @Test
+    public void nonEquatorialSemiMajorAxis()
+    {
+       double aResult, aCorrect;
+       aResult = resultOrbits.get(0).getA();
+       aCorrect = correctOrbits.get(0).getA();
+       
+       String error = "Semi-major axis calculated incorrectly. Received " + aResult + ", expected " + aCorrect;
+       
+       assertTrue(error, closeEnough(aResult,aCorrect));
+    }
+    
+    /**
+     * Tests whether or not inclination is calculated correctly for non-equatorial orbits.
+     */
+    @Test
+    public void nonEquatorialInclination()
+    {
+       double iResult, iCorrect;
+       iResult = resultOrbits.get(0).getI();
+       iCorrect = correctOrbits.get(0).getI();
+       
+       String error = "Inclination calculated incorrectly. Received " + iResult + ", expected " + iCorrect;
+       
+       assertTrue(error, closeEnough(iResult,iCorrect));
+    }
+    
+    /**
+     * Tests whether or not longitude of the ascending node is calculated correctly for non-equatorial orbits.
+     */
+    @Test
+    public void nonEquatorialLongitudeOfTheAscendingNode()
+    {
+       double omResult, omCorrect;
+       omResult = resultOrbits.get(0).getOm();
+       omCorrect = correctOrbits.get(0).getOm();
+       
+       String error = "Longitude of the ascending node calculated incorrectly. Received " + omResult + ", expected " + omCorrect;
+       
+       assertTrue(error, closeEnough(omResult,omCorrect));
+    }
+    
+    /**
+     * Tests whether or not argument of the periapsis is calculated correctly for non-equatorial orbits.
+     */
+    @Test
+    public void nonEquatorialArgumentOfPeriapsis()
+    {
+       double wResult, wCorrect;
+       wResult = resultOrbits.get(0).getW();
+       wCorrect = correctOrbits.get(0).getW();
+       
+       String error = "Argument of the periapsis calculated incorrectly. Received " + wResult + ", expected " + wCorrect;
+       
+       assertTrue(error, closeEnough(wResult,wCorrect));
+    }
+    
+    /**
+     * Tests whether or not true anomaly is calculated correctly for non-equatorial orbits.
+     */
+    @Test
+    public void nonEquatorialTrueAnomaly()
+    {
+       double vResult, vCorrect;
+       vResult = resultOrbits.get(0).getV();
+       vCorrect = correctOrbits.get(0).getV();
+       
+       String error = "True anomaly calculated incorrectly. Received " + vResult + ", expected " + vCorrect;
+       
+       assertTrue(error, closeEnough(vResult,vCorrect));
     }
     
 }
