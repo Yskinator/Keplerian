@@ -102,6 +102,16 @@ public class TwoBodySolverTest {
         return roundA.equals(roundB);
     }
     
-    
+    @Test
+    public void nonEquatorialEccentricity()
+    {
+       double eResult, eCorrect;
+       eResult = resultOrbits.get(0).getE();
+       eCorrect = correctOrbits.get(0).getE();
+       
+       String error = "Eccentricity calculated incorrectly. m = " + masses.get(0) + ", r = " + positions.get(0) + ", vel = " + velocities.get(0);
+       
+       assertTrue(error, closeEnough(eResult,eCorrect));
+    }
     
 }
