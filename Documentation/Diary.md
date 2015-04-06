@@ -16,3 +16,6 @@
 * 1h: Lisäoperaatioita vektoreille, korjauksia kaavoihin. 
  
 Toistaiseksi kolme kuudesta elementistä lasketaan oikein. Koska tarkoituksena on toimia kahdessa ulottuvuudessa, kaikki kiertoradat ovat päiväntasaajan tasolla. Ikävä kyllä tämä on erikoistapaus, jossa noodi vektori n ei ole määritelty. Koska tätä käytetään longitude of the ascending noden ja argument of the periapsisin laskemiseen, näidenkin arvot saavat vanhan kunnon NaNin, minkä lisäksi true anomaly saa muuten vain väärän arvon oletettavasti kaavassa tekemäni virheen takia. Eli siis, vaihtoehtoisia kaavoja ja lisää säätämistä tarvitaan, mutta hyvin lähellä toimivaa olaan.
+
+##6.4
+* 30min: Aloitin pelimoottoria/käyttöliittymää ollessani nettiyhteyden ulottumattomissa.
