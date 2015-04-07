@@ -49,6 +49,16 @@ public class TwoBodySolverTest {
         oR = TwoBodySolver.findOrbit(m, r, vel);
         resultOrbits.add(oR);
         
+        m = 1.98891691172467E+30;
+        masses.add(m);
+        r = new Vector3d(617244712357.9814, -431694791368.0269, 0.0);
+        positions.add(r);
+        vel = new Vector3d(7320.00000000049, 11328.999999999676, 0.0);
+        velocities.add(vel);
+        oC = new Orbit(0.048368987403347746, 777786552616.2518, 0, 0, 16.411667325491873, 308.6197751126067);
+        correctOrbits.add(oC);
+        oR = TwoBodySolver.findOrbit(m, r, vel);
+        resultOrbits.add(oR);
     }
     
 
@@ -103,14 +113,14 @@ public class TwoBodySolverTest {
     }
     
     /**
-     * Tests whether or not eccentricity is calculated correctly for non-equatorial orbits.
+     * Tests whether or not eccentricity is calculated correctly.
+     * @param i Index used to find the correct orbits to test.
      */
-    @Test
-    public void nonEquatorialEccentricity()
+    private void testEccentricity(int i)
     {
        double eResult, eCorrect;
-       eResult = resultOrbits.get(0).getE();
-       eCorrect = correctOrbits.get(0).getE();
+       eResult = resultOrbits.get(i).getE();
+       eCorrect = correctOrbits.get(i).getE();
        
        String error = "Eccentricity calculated incorrectly. Received " + eResult + ", expected " + eCorrect;
        
@@ -118,14 +128,14 @@ public class TwoBodySolverTest {
     }
     
     /**
-     * Tests whether or not semi-major axis is calculated correctly for non-equatorial orbits.
+     * Tests whether or not semi-major axis is calculated correctly.
+     * @param i Index used to find the correct orbits to test.
      */
-    @Test
-    public void nonEquatorialSemiMajorAxis()
+    private void testSemiMajorAxis(int i)
     {
        double aResult, aCorrect;
-       aResult = resultOrbits.get(0).getA();
-       aCorrect = correctOrbits.get(0).getA();
+       aResult = resultOrbits.get(i).getA();
+       aCorrect = correctOrbits.get(i).getA();
        
        String error = "Semi-major axis calculated incorrectly. Received " + aResult + ", expected " + aCorrect;
        
@@ -133,14 +143,14 @@ public class TwoBodySolverTest {
     }
     
     /**
-     * Tests whether or not inclination is calculated correctly for non-equatorial orbits.
+     * Tests whether or not inclination is calculated correctly.
+     * @param i Index used to find the correct orbits to test.
      */
-    @Test
-    public void nonEquatorialInclination()
+    private void testInclination(int i)
     {
        double iResult, iCorrect;
-       iResult = resultOrbits.get(0).getI();
-       iCorrect = correctOrbits.get(0).getI();
+       iResult = resultOrbits.get(i).getI();
+       iCorrect = correctOrbits.get(i).getI();
        
        String error = "Inclination calculated incorrectly. Received " + iResult + ", expected " + iCorrect;
        
@@ -148,14 +158,14 @@ public class TwoBodySolverTest {
     }
     
     /**
-     * Tests whether or not longitude of the ascending node is calculated correctly for non-equatorial orbits.
+     * Tests whether or not longitude of the ascending node is calculated correctly.
+     * @param i Index used to find the correct orbit to test.
      */
-    @Test
-    public void nonEquatorialLongitudeOfTheAscendingNode()
+    private void testLongitudeOfTheAscendingNode(int i)
     {
        double omResult, omCorrect;
-       omResult = resultOrbits.get(0).getOm();
-       omCorrect = correctOrbits.get(0).getOm();
+       omResult = resultOrbits.get(i).getOm();
+       omCorrect = correctOrbits.get(i).getOm();
        
        String error = "Longitude of the ascending node calculated incorrectly. Received " + omResult + ", expected " + omCorrect;
        
@@ -163,14 +173,14 @@ public class TwoBodySolverTest {
     }
     
     /**
-     * Tests whether or not argument of the periapsis is calculated correctly for non-equatorial orbits.
+     * Tests whether or not argument of the periapsis is calculated correctly.
+     * @param i Index used to find the correct orbit to test.
      */
-    @Test
-    public void nonEquatorialArgumentOfPeriapsis()
+    private void testArgumentOfPeriapsis(int i)
     {
        double wResult, wCorrect;
-       wResult = resultOrbits.get(0).getW();
-       wCorrect = correctOrbits.get(0).getW();
+       wResult = resultOrbits.get(i).getW();
+       wCorrect = correctOrbits.get(i).getW();
        
        String error = "Argument of the periapsis calculated incorrectly. Received " + wResult + ", expected " + wCorrect;
        
@@ -178,18 +188,50 @@ public class TwoBodySolverTest {
     }
     
     /**
-     * Tests whether or not true anomaly is calculated correctly for non-equatorial orbits.
+     * Tests whether or not true anomaly is calculated correctly.
+     * @param i Index used to find the correct orbit to test.
      */
-    @Test
-    public void nonEquatorialTrueAnomaly()
+    private void testTrueAnomaly(int i)
     {
        double vResult, vCorrect;
-       vResult = resultOrbits.get(0).getV();
-       vCorrect = correctOrbits.get(0).getV();
+       vResult = resultOrbits.get(i).getV();
+       vCorrect = correctOrbits.get(i).getV();
        
        String error = "True anomaly calculated incorrectly. Received " + vResult + ", expected " + vCorrect;
        
        assertTrue(error, closeEnough(vResult,vCorrect));
+    }
+    
+    /**
+     * Runs test for the given orbit.
+     * @param i Index of the orbit to be tested.
+     */
+    private void testOrbit(int i)
+    {
+        testEccentricity(0);
+        testSemiMajorAxis(0);
+        testInclination(0);
+        testLongitudeOfTheAscendingNode(0);
+        testArgumentOfPeriapsis(0);
+        testTrueAnomaly(0);
+    }
+    
+    /**
+     * Test whether a non-equatorial orbit is calculated correctly.
+     */
+    @Test
+    public void nonEquatorialOrbit()
+    {
+        testOrbit(0);
+    }
+    
+    /**
+     * Test whether a equatorial orbit is calculated correctly.
+     */
+    @Test
+    public void equatorialOrbit()
+    {
+        testOrbit(1);
     }
     
 }
