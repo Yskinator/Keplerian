@@ -72,7 +72,14 @@ public class TwoBodySolver {
      */
     private static double findArgumentOfPeriapsis(Vector3d n, Vector3d ev) {
         double w;
-        w = (Vector3d.dotProduct(n, ev))/(n.magn()*ev.magn());
+        if(n.isUndefined())
+        {
+            w = Math.atan2(ev.y, ev.x);
+        }
+        else
+        {
+            w = (Vector3d.dotProduct(n, ev))/(n.magn()*ev.magn());
+        }
         
         if((new Vector3d(0,0,ev.z).magn()) < 0)
         {
@@ -189,7 +196,15 @@ public class TwoBodySolver {
      */
     private static double findLongitudeOfAscendingNode(Vector3d n) {
         double om;
-        om = Math.acos((new Vector3d(n.x,0,0)).magn()/n.magn());
+        
+        if(n.isUndefined())
+        {
+            om = 0;
+        }
+        else
+        {
+            om = Math.acos((new Vector3d(n.x,0,0)).magn()/n.magn());
+        }
         
         if(n.y < 0)
         {
