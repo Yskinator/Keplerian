@@ -1,6 +1,8 @@
 
 package keplerian.physics;
 
+import static java.lang.Double.NaN;
+
 /**
  * A 3 dimensional double precision vector.
  * New operations are implemented as they are needed.
@@ -43,6 +45,18 @@ public class Vector3d {
     public Vector3d unitVector()
     {
         return Vector3d.mul(1/this.magn(), this);
+    }
+    
+    public boolean isUndefined()
+    {
+        if(this.x == NaN || this.y == NaN || this.z == NaN)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
     
     /**
