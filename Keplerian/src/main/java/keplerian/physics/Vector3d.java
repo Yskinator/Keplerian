@@ -49,7 +49,7 @@ public class Vector3d {
     
     public boolean isUndefined()
     {
-        if(this.x == NaN || this.y == NaN || this.z == NaN)
+        if(Double.isNaN(x)||Double.isNaN(y)||Double.isNaN(z))
         {
             return true;
         }
