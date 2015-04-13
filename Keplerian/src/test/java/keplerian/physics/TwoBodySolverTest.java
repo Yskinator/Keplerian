@@ -203,35 +203,111 @@ public class TwoBodySolverTest {
     }
     
     /**
-     * Runs test for the given orbit.
-     * @param i Index of the orbit to be tested.
+     * Test whether or not non-equatorial orbit's eccentricity is calculated correctly.
      */
-    private void testOrbit(int i)
+    @Test
+    public void nonEquatorialEccentricity()
     {
         testEccentricity(0);
+    }
+    
+    /**
+     * Test whether or not non-equatorial orbit's semi-major axis is calculated correctly.
+     */
+    @Test
+    public void nonEquatorialSemiMajorAxis()
+    {
         testSemiMajorAxis(0);
+    }
+    
+    /**
+     * Test whether or not non-equatorial orbit's inclination is calculated correctly.
+     */
+    @Test
+    public void nonEquatorialInclination()
+    {
         testInclination(0);
+    }
+    
+    /**
+     * Test whether or not non-equatorial orbit's longitude of the ascending node is calculated correctly.
+     */
+    @Test
+    public void nonEquatorialLongitudeOfTheAscendingNode()
+    {
         testLongitudeOfTheAscendingNode(0);
+    }
+    
+    /**
+     * Test whether or not non-equatorial orbit's argument of periapsis is calculated correctly.
+     */
+    @Test
+    public void nonEquatorialArgumentOfPeriapsis()
+    {
         testArgumentOfPeriapsis(0);
+    }
+    
+    /**
+     * Test whether or not non-equatorial orbit's true anomaly is calculated correctly.
+     */
+    @Test
+    public void nonEquatorialTrueAnomaly()
+    {
         testTrueAnomaly(0);
     }
     
     /**
-     * Test whether a non-equatorial orbit is calculated correctly.
+     * Test whether or not equatorial orbit's eccentricity is calculated correctly.
      */
     @Test
-    public void nonEquatorialOrbit()
+    public void equatorialEccentricity()
     {
-        testOrbit(0);
+        testEccentricity(1);
     }
     
     /**
-     * Test whether a equatorial orbit is calculated correctly.
+     * Test whether or not equatorial orbit's semi-major axis is calculated correctly.
      */
     @Test
-    public void equatorialOrbit()
+    public void equatorialSemiMajorAxis()
     {
-        testOrbit(1);
+        testSemiMajorAxis(1);
+    }
+    
+    /**
+     * Test whether or not equatorial orbit's inclination is calculated correctly.
+     */
+    @Test
+    public void equatorialInclination()
+    {
+        testInclination(1);
+    }
+    
+    /**
+     * Test whether or not equatorial orbit's longitude of the ascending node is calculated correctly.
+     */
+    @Test
+    public void equatorialLongitudeOfTheAscendingNode()
+    {
+        testLongitudeOfTheAscendingNode(1);
+    }
+    
+    /**
+     * Test whether or not equatorial orbit's argument of periapsis is calculated correctly.
+     */
+    @Test
+    public void equatorialArgumentOfPeriapsis()
+    {
+        testArgumentOfPeriapsis(1);
+    }
+    
+    /**
+     * Test whether or not equatorial orbit's true anomaly is calculated correctly.
+     */
+    @Test
+    public void equatorialTrueAnomaly()
+    {
+        testTrueAnomaly(1);
     }
     
 }
