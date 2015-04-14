@@ -78,10 +78,10 @@ public class TwoBodySolver {
         }
         else
         {
-            w = (Vector3d.dotProduct(n, ev))/(n.magn()*ev.magn());
+            w = Math.acos(Vector3d.dotProduct(n, ev)/(n.magn()*ev.magn()));
         }
         
-        if((new Vector3d(0,0,ev.z).magn()) < 0)
+        if((new Vector3d(0,0,ev.z).magn()) > 0)
         {
             w = 2*Math.PI - w;
         }
@@ -141,7 +141,7 @@ public class TwoBodySolver {
      * @return Node vector.
      */
     private static Vector3d findNodeVector(Vector3d h) {
-        Vector3d n = findAngularMomentum(h, new Vector3d(0,0,1));
+        Vector3d n = Vector3d.crossProduct(new Vector3d(0,0,1), h);
         n = n.unitVector();
         return n;
     }
@@ -203,7 +203,7 @@ public class TwoBodySolver {
         }
         else
         {
-            om = Math.acos((new Vector3d(n.x,0,0)).magn()/n.magn());
+            om = Math.acos(n.x/n.magn());
         }
         
         if(n.y < 0)
