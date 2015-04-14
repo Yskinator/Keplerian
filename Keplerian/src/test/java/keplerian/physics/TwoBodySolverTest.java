@@ -7,6 +7,7 @@
 package keplerian.physics;
 
 import java.math.BigDecimal;
+import java.math.MathContext;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import org.junit.After;
@@ -95,7 +96,7 @@ public class TwoBodySolverTest {
         if (places < 0) throw new IllegalArgumentException();
 
         BigDecimal bd = new BigDecimal(value);
-        bd = bd.setScale(places, RoundingMode.HALF_UP);
+        bd = bd.round(new MathContext(places, RoundingMode.HALF_UP));
         return bd;
     }
     
@@ -111,8 +112,11 @@ public class TwoBodySolverTest {
         {
             return false;
         }
-        BigDecimal roundA = round(a, 5);
-        BigDecimal roundB = round(b, 5);
+        BigDecimal roundA = round(a, 1);
+        BigDecimal roundB = round(b, 1);
+        
+        System.out.println("roundA: "+ roundA);
+        System.out.println("roundB: " + roundB);
         
         return roundA.equals(roundB);
     }
