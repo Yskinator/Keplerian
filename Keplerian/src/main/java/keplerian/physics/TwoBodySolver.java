@@ -18,9 +18,10 @@ public class TwoBodySolver {
      * @param m Mass of the parent object, used to calculate the gravitational pull.
      * @param r Position of the object.
      * @param vel Velocity of the object
+     * @param t Current time.
      * @return Orbit of the object.
      */
-    public static Orbit findOrbit(double m, Vector3d r, Vector3d vel)
+    public static Orbit findOrbit(double m, Vector3d r, Vector3d vel, double t)
     {
         //The orbital elements
         double e;
@@ -46,7 +47,7 @@ public class TwoBodySolver {
         v = findTrueAnomaly(ev, r, vel);
         m = findMeanAnomaly(v, e);
         
-        return new Orbit(e,a,i,om,w,m, mu);
+        return new Orbit(e,a,i,om,w,m, mu,t);
         
     }
 

@@ -44,6 +44,11 @@ public class Orbit {
     private double mu;
     
     /**
+     * Time at which the orbit was calculated. Used when finding delta times.
+     */
+    private double t;
+    
+    /**
      * Constructs a new orbit.
      * @param e Eccentricity
      * @param a Semi-major axis.
@@ -52,8 +57,9 @@ public class Orbit {
      * @param w Argument of the periapsis.
      * @param m Mean anomaly.
      * @param mu mass*G. Used when predicting orbits, stored for convenience.
+     * @param t Epoch time.
      */
-    public Orbit(double e, double a, double i, double om, double w, double m, double mu)
+    public Orbit(double e, double a, double i, double om, double w, double m, double mu, double t)
     {
         this.e = e;
         this.a = a;
@@ -62,6 +68,7 @@ public class Orbit {
         this.w = w;
         this.m = m;
         this.mu = mu;
+        this.t = t;
     }
     
     /**
@@ -79,6 +86,7 @@ public class Orbit {
         this.w = o.getW();
         this.m = m;
         this.mu = o.getMu();
+        this.t = o.getT();
     }
     
     /**
@@ -155,5 +163,12 @@ public class Orbit {
      */
     public double getMu() {
         return mu;
+    }
+
+    /**
+     * @return the t
+     */
+    public double getT() {
+        return t;
     }
 }

@@ -37,7 +37,7 @@ public class Main {
         
         Vector3d vel = new Vector3d(xVel, yVel, 0);
         
-        Orbit orbit = TwoBodySolver.findOrbit(mass, r, vel);
+        Orbit orbit = TwoBodySolver.findOrbit(mass, r, vel, 0);
         System.out.println("Resulting orbit: " + orbit);
         
     }

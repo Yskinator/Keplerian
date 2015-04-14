@@ -95,11 +95,12 @@ public class RigidBody {
     
     /**
      * Places the object in orbit.
+     * @param t Current time.
      */
-    public void toRails()
+    public void toRails(double t)
     {
         float mParent = parent.getMass();
-        this.orbit = TwoBodySolver.findOrbit(mParent, relPos, relVel);
+        this.orbit = TwoBodySolver.findOrbit(mParent, relPos, relVel, t);
     }
     /**
      * Removes the object from orbit and finds its velocity and position.
