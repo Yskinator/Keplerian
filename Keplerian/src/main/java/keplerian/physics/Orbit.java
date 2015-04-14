@@ -76,8 +76,9 @@ public class Orbit {
      * Used to easily make new orbits when predicting orbits - only mean anomaly changes.
      * @param o Original orbit.
      * @param m Mean anomaly.
+     * @param t Epoch time.
      */
-    public Orbit(Orbit o, double m)
+    public Orbit(Orbit o, double m, double t)
     {
         this.e = o.getE();
         this.a = o.getA();
@@ -86,7 +87,7 @@ public class Orbit {
         this.w = o.getW();
         this.m = m;
         this.mu = o.getMu();
-        this.t = o.getT();
+        this.t = t;
     }
     
     /**

@@ -250,7 +250,7 @@ public class TwoBodySolver {
     private static Orbit predictOrbit(Orbit o, double t)
     {
         double dt = t-o.getT();
-        return new Orbit(o, o.getMu()*dt);
+        return new Orbit(o, o.getMu()*dt, t);
     }
     
     /**
