@@ -244,11 +244,12 @@ public class TwoBodySolver {
     /**
      * Predicts the new orbital parameters after given change of time.
      * @param o Current orbit.
-     * @param dt Delta time.
+     * @param t Desired time.
      * @return New orbit.
      */
-    private static Orbit predictOrbit(Orbit o, double dt)
+    private static Orbit predictOrbit(Orbit o, double t)
     {
+        double dt = t-o.getT();
         return new Orbit(o, o.getMu()*dt);
     }
     
