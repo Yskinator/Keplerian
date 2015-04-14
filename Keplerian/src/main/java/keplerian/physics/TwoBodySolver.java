@@ -44,9 +44,9 @@ public class TwoBodySolver {
         om = findLongitudeOfAscendingNode(n);
         w = findArgumentOfPeriapsis(n, ev);
         v = findTrueAnomaly(ev, r, vel);
+        m = findMeanAnomaly(v, e);
         
-        
-        return new Orbit(e,a,i,om,w,v);
+        return new Orbit(e,a,i,om,w,m);
         
     }
 
@@ -238,6 +238,42 @@ public class TwoBodySolver {
         ev = Vector3d.sub(ev, Vector3d.mul(Vector3d.dotProduct(r, vel), vel));
         ev = Vector3d.div(ev, mu);
         return ev;
+    }
+    
+    private static Orbit predictOrbit(double dt)
+    {
+        
+    }
+    
+    /**
+     * Calculates the eccentric anomaly from true anomaly.
+     * @param v True anomaly.
+     * @param e Eccentricity.
+     * @return Eccentric anomaly.
+     */
+    private static double findEccentricAnomaly(double v, double e)
+    {
+        double E = e + Math.cos(v);
+        E = E/(1 + e * Math.cos(v));
+        E = Math.acos(E);
+        return E;
+    }
+    
+    /**
+     * Calculates the mean anomaly from true anomaly.
+     * @param v True anomaly.
+     * @param e Eccentricity.
+     * @return Mean anomaly.
+     */
+    private static double findMeanAnomaly(double v, double e)
+    {
+        double E = findEccentricAnomaly(v, e);
+        double M = E - (Math.E * Math.sin(E));
+        if(M < 0)
+        {
+            M = M + 2*Math.PI;
+        }
+        return M;
     }
     
 }

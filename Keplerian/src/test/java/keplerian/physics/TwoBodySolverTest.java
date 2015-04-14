@@ -45,7 +45,7 @@ public class TwoBodySolverTest {
         positions.add(r);
         vel = new Vector3d(7320.00000000049, 11328.999999999676, -211.00000000002197);
         velocities.add(vel);
-        oC = new Orbit(0.04842547228152425, 778194564622.5737, toRadians(1.3051851018817964), toRadians(100.4943151229807), toRadians(275.3654041542324), toRadians(309.17915580554745));
+        oC = new Orbit(0.04842547228152425, 778194564622.5737, toRadians(1.3051851018817964), toRadians(100.4943151229807), toRadians(275.3654041542324), toRadians(313.38300121665685));
         correctOrbits.add(oC);
         oR = TwoBodySolver.findOrbit(m, r, vel);
         resultOrbits.add(oR);
@@ -56,7 +56,7 @@ public class TwoBodySolverTest {
         positions.add(r);
         vel = new Vector3d(7320.00000000049, 11328.999999999676, 0.0);
         velocities.add(vel);
-        oC = new Orbit(0.048368987403347746, 777786552616.2518, toRadians(0), toRadians(0), toRadians(16.411667325491873), toRadians(308.6197751126067));
+        oC = new Orbit(0.048368987403347746, 777786552616.2518, toRadians(0), toRadians(0), toRadians(16.411667325491873), toRadians(312.8531705822729));
         correctOrbits.add(oC);
         oR = TwoBodySolver.findOrbit(m, r, vel);
         resultOrbits.add(oR);
@@ -197,18 +197,18 @@ public class TwoBodySolverTest {
     }
     
     /**
-     * Tests whether or not true anomaly is calculated correctly.
+     * Tests whether or not mean anomaly is calculated correctly.
      * @param i Index used to find the correct orbit to test.
      */
-    private void testTrueAnomaly(int i)
+    private void testMeanAnomaly(int i)
     {
-       double vResult, vCorrect;
-       vResult = resultOrbits.get(i).getV();
-       vCorrect = correctOrbits.get(i).getV();
+       double mResult, mCorrect;
+       mResult = resultOrbits.get(i).getM();
+       mCorrect = correctOrbits.get(i).getM();
        
-       String error = "True anomaly calculated incorrectly. Received " + vResult + ", expected " + vCorrect;
+       String error = "Mean anomaly calculated incorrectly. Received " + mResult + ", expected " + mCorrect;
        
-       assertTrue(error, closeEnough(vResult,vCorrect));
+       assertTrue(error, closeEnough(mResult,mCorrect));
     }
     
     /**
@@ -257,12 +257,12 @@ public class TwoBodySolverTest {
     }
     
     /**
-     * Test whether or not non-equatorial orbit's true anomaly is calculated correctly.
+     * Test whether or not non-equatorial orbit's mean anomaly is calculated correctly.
      */
     @Test
-    public void nonEquatorialTrueAnomaly()
+    public void nonEquatorialMeanAnomaly()
     {
-        testTrueAnomaly(0);
+        testMeanAnomaly(0);
     }
     
     /**
@@ -311,12 +311,12 @@ public class TwoBodySolverTest {
     }
     
     /**
-     * Test whether or not equatorial orbit's true anomaly is calculated correctly.
+     * Test whether or not equatorial orbit's mean anomaly is calculated correctly.
      */
     @Test
-    public void equatorialTrueAnomaly()
+    public void equatorialMeanAnomaly()
     {
-        testTrueAnomaly(1);
+        testMeanAnomaly(1);
     }
     
 }

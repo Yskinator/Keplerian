@@ -34,9 +34,9 @@ public class Orbit {
     private double w;
     
     /**
-     * True anomaly.
+     * Mean anomaly.
      */
-    private double v;
+    private double m;
     
     /**
      * Constructs a new orbit.
@@ -45,16 +45,16 @@ public class Orbit {
      * @param i Inclination
      * @param om Longitude of the ascending node
      * @param w Argument of the periapsis.
-     * @param v True anomaly.
+     * @param m Mean anomaly.
      */
-    public Orbit(double e, double a, double i, double om, double w, double v)
+    public Orbit(double e, double a, double i, double om, double w, double m)
     {
         this.e = e;
         this.a = a;
         this.i = i;
         this.om = om;
         this.w = w;
-        this.v = v;
+        this.m = m;
     }
     
     /**
@@ -80,7 +80,7 @@ public class Orbit {
     @Override
     public String toString()
     {
-        String s = "e: " + getE() + " a: " + getA() + " i: " + getI() + " om: " + getOm() + " w: " + getW() + " v: " + getV();
+        String s = "e: " + getE() + " a: " + getA() + " i: " + getI() + " om: " + getOm() + " w: " + getW() + " m: " + getM();
         return s;
     }
 
@@ -120,9 +120,9 @@ public class Orbit {
     }
 
     /**
-     * @return the v
+     * @return the m
      */
-    public double getV() {
-        return v;
+    public double getM() {
+        return m;
     }
 }
