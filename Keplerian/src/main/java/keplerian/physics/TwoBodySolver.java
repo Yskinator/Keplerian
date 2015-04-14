@@ -221,7 +221,7 @@ public class TwoBodySolver {
      */
     private static double findInclination(Vector3d h) {
         double i;
-        i = Math.acos((new Vector3d(0,0,h.z)).magn()/h.magn());
+        i = Math.acos(h.z/h.magn());
         return i;
     }
 

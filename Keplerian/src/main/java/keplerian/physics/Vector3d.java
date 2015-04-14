@@ -99,7 +99,7 @@ public class Vector3d {
      */
     public static Vector3d crossProduct(Vector3d u, Vector3d v)
     {
-        double x = u.y*v.z -u.z*v.y;
+        double x = u.y*v.z - u.z*v.y;
         double y = u.z*v.x - u.x*v.z;
         double z = u.x*v.y - u.y*v.x;
         
