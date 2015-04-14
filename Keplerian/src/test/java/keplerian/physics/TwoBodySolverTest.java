@@ -45,7 +45,7 @@ public class TwoBodySolverTest {
         positions.add(r);
         vel = new Vector3d(7320.00000000049, 11328.999999999676, -211.00000000002197);
         velocities.add(vel);
-        oC = new Orbit(0.04842547228152425, 778194564622.5737, toRadians(1.3051851018817964), toRadians(100.4943151229807), toRadians(275.3654041542324), toRadians(313.38300121665685));
+        oC = new Orbit(0.04842547228152425, 778194564622.5737, toRadians(1.3051851018817964), toRadians(100.4943151229807), toRadians(275.3654041542324), toRadians(313.38300121665685), 0);
         correctOrbits.add(oC);
         oR = TwoBodySolver.findOrbit(m, r, vel);
         resultOrbits.add(oR);
@@ -56,7 +56,7 @@ public class TwoBodySolverTest {
         positions.add(r);
         vel = new Vector3d(7320.00000000049, 11328.999999999676, 0.0);
         velocities.add(vel);
-        oC = new Orbit(0.048368987403347746, 777786552616.2518, toRadians(0), toRadians(0), toRadians(16.411667325491873), toRadians(312.8531705822729));
+        oC = new Orbit(0.048368987403347746, 777786552616.2518, toRadians(0), toRadians(0), toRadians(16.411667325491873), toRadians(312.8531705822729), 0);
         correctOrbits.add(oC);
         oR = TwoBodySolver.findOrbit(m, r, vel);
         resultOrbits.add(oR);
