@@ -39,6 +39,11 @@ public class Orbit {
     private double m;
     
     /**
+     * Mu, calculated from mass*G. Stored for convenience. 
+     */
+    private double mu;
+    
+    /**
      * Constructs a new orbit.
      * @param e Eccentricity
      * @param a Semi-major axis.
@@ -46,8 +51,9 @@ public class Orbit {
      * @param om Longitude of the ascending node
      * @param w Argument of the periapsis.
      * @param m Mean anomaly.
+     * @param mu mass*G. Used when predicting orbits, stored for convenience.
      */
-    public Orbit(double e, double a, double i, double om, double w, double m)
+    public Orbit(double e, double a, double i, double om, double w, double m, double mu)
     {
         this.e = e;
         this.a = a;
@@ -55,6 +61,24 @@ public class Orbit {
         this.om = om;
         this.w = w;
         this.m = m;
+        this.mu = mu;
+    }
+    
+    /**
+     * Constructs a new orbit, identical to the previous one except for the new mean anomaly.
+     * Used to easily make new orbits when predicting orbits - only mean anomaly changes.
+     * @param o Original orbit.
+     * @param m Mean anomaly.
+     */
+    public Orbit(Orbit o, double m)
+    {
+        this.e = o.getE();
+        this.a = o.getA();
+        this.i = o.getI();
+        this.om = o.getOm();
+        this.w = o.getW();
+        this.m = m;
+        this.mu = o.getMu();
     }
     
     /**
@@ -124,5 +148,12 @@ public class Orbit {
      */
     public double getM() {
         return m;
+    }
+
+    /**
+     * @return the mu
+     */
+    public double getMu() {
+        return mu;
     }
 }

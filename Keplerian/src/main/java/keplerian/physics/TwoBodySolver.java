@@ -46,7 +46,7 @@ public class TwoBodySolver {
         v = findTrueAnomaly(ev, r, vel);
         m = findMeanAnomaly(v, e);
         
-        return new Orbit(e,a,i,om,w,m);
+        return new Orbit(e,a,i,om,w,m, mu);
         
     }
 
@@ -240,9 +240,15 @@ public class TwoBodySolver {
         return ev;
     }
     
-    private static Orbit predictOrbit(double dt)
+    /**
+     * Predicts the new orbital parameters after given change of time.
+     * @param o Current orbit.
+     * @param dt Delta time.
+     * @return New orbit.
+     */
+    private static Orbit predictOrbit(Orbit o, double dt)
     {
-        
+        return new Orbit(o, o.getMu()*dt);
     }
     
     /**
