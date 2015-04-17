@@ -24,3 +24,22 @@ Toistaiseksi kolme kuudesta elementistä lasketaan oikein. Koska tarkoituksena o
 * 30min: Lisää testejä.
 
 Elegantti ratkaisu usean eri kiertoradan testaukseen: testi xOrbit(), jossa x on kiertoradan tyyppi, kutsuu testOrbit(kiertoradanNumero) metodia, joka puolestaan kutsuu jokaisen kiertorataparametrin testiä yksi kerrallaan. Ikävä kyllä JUnit lopettaa testin ensimmäiseen "väärin" laskettuun parametriin, mikä tällä hetkellä on mikä tahansa parametri, johtuen lievästä heitosta saadun tuloksen ja mallina käyttämäni "oikean" arvon välillä - ilmeisesti 5 desimaalia on liikaa vaadittu. Lyhyesti sanottuna, kaunis koodini ei toimi, joka kiertorata tarvitsee sittenkin 6 kpl copy-paste testiä.
+
+##8.4
+* 30min: Lisäsin erikoiskäsittelyn joka huolehtii tapauksista, joissa noodivektori ei ole määritelty, eli käytännössä päiväntasaajan tasolla kulkevat kiertoradat, eli siis kaikki aikomamme 2d-käyttöliittymän kiertoradat.
+
+##13.4
+* 30min: Muokkasin TwoBodySolverin testejä siten, että jokainen kiertorataparametri testataan erikseen.
+* NaN min: Vector3d:n isUndefined() metodi etsi NaN arvon saaneita vektorin komponentteja yhtäsuuruusoperaattorin '==' avulla, mutta NaN != NaN. Vaihdoin tilalle Double.isNaN():in.
+
+##14.4
+* 20min: Kävi ilmi, että olin koko ajan testeissäni verrannut asteita radiaaneihin ja ihmetellyt, mikä menee pieleen. Korjasin tämän, sekä lievensin testien tarkkuusvaatimuksia.
+* 25min: Korjasin kahden viimeisen väärin lasketun kiertorataparametrin kaavat. Kaikki parametrit lasketaan nyt oikein.
+* 30min: Lisäsin kiertoradan ennustamisen, sekä ajan kiertoratoihin. Aikaisemman kiertoradan avulla voidaan nyt laskea uudet parametrit mille tahansa ajan hetkelle.
+
+##17.4
+* 30min: Testejä Vector3d:lle.
+
+Seuraavaksi joko kalastelen pisteitä piirtämällä (lopultakin) luokkakaavion, tai sitten implementoin sijainnin laskennan. Näyttäisi siltä, että joudun laskemaan numeerisesti true anomalyn mean anomalyn avulla, ja sen avulla sitten itse sijainnin ja nopeus vektorin.
+
+Todettakoon tässä vaiheessa, että kiertorataparametrit ovat itselleni täysin uusi tuttavuus. Suurin haaste projektissa lieneekin nykyiset fysiikan taitoni ylittävien kaavojen omaksuminen.
