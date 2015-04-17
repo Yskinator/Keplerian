@@ -39,6 +39,24 @@ public class Vector3d {
     }
     
     /**
+     * Checks if the given object is equal to the vector.
+     * True if the object is a vector and its components are equal to this vector's.
+     * @param o Object.
+     * @return Whether or not the object represents a vector equal to this one.
+     */
+    @Override
+    public boolean equals(Object o)
+    {
+        if(o.getClass() != this.getClass())
+        {
+            return false;
+        }
+        
+        Vector3d v = (Vector3d) o;
+        return v.x == x && v.y == y && v.z == z;
+    }
+    
+    /**
      * Finds the unit vector corresponding to the vector.
      * @return Corresponding unit vector.
      */
