@@ -35,7 +35,7 @@ Elegantti ratkaisu usean eri kiertoradan testaukseen: testi xOrbit(), jossa x on
 ##14.4
 * 20min: Kävi ilmi, että olin koko ajan testeissäni verrannut asteita radiaaneihin ja ihmetellyt, mikä menee pieleen. Korjasin tämän, sekä lievensin testien tarkkuusvaatimuksia.
 * 25min: Korjasin kahden viimeisen väärin lasketun kiertorataparametrin kaavat. Kaikki parametrit lasketaan nyt oikein.
-* 30min: Lisäsin kiertoradan ennustamisen, sekä ajan kiertoratoihin. Aikaisemman kiertoradan avulla voidaan nyt laskea uudet parametrit mille tahansa ajan hetkelle.
+* 30min: Lisäsin kiertoradan ennustamisen, sekä ajan kiertoratoihin. Aikaisemman kiertoradan avulla voidaan nyt laskea uudet parametrit mille tahansa ajanhetkelle.
 
 ##17.4
 * 30min: Testejä Vector3d:lle.
