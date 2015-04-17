@@ -175,6 +175,9 @@ public class Vector3dTest {
         assertEquals(new Vector3d(64, -16, -8), v);
     }
     
+    /**
+     * Tests whether or not dot product is calculated correctly.
+     */
     @Test
     public void dotProduct()
     {
