@@ -10,7 +10,7 @@ public class RigidBody {
     /**
      * The mass of the object.
      */
-    private float mass;
+    private double mass;
     
     /**
      * Current orbit of the object.
@@ -64,7 +64,7 @@ public class RigidBody {
      * @param angularVelocity Angular velocity of the object.
      * @param parent The celestial body the object is orbiting around.
      */
-    public RigidBody(float mass, Vector3d relPos, Vector3d relVel, Vector3d facing, Vector3d angularVelocity, CelestialBody parent)
+    public RigidBody(double mass, Vector3d relPos, Vector3d relVel, Vector3d facing, Vector3d angularVelocity, CelestialBody parent)
     {
         this.mass = mass;
         this.relPos = relPos;
@@ -84,7 +84,7 @@ public class RigidBody {
      * @param orbit The orbit the object is currently on.
      * @param parent The celestial body the object is orbiting around.
      */
-    public RigidBody(float mass, Vector3d facing, Vector3d angularVelocity, Orbit orbit, CelestialBody parent)
+    public RigidBody(double mass, Vector3d facing, Vector3d angularVelocity, Orbit orbit, CelestialBody parent)
     {
         this.mass = mass;
         this.facing = facing;
@@ -99,7 +99,7 @@ public class RigidBody {
      */
     public void toRails(double t)
     {
-        float mParent = parent.getMass();
+        double mParent = parent.getMass();
         this.orbit = TwoBodySolver.findOrbit(mParent, relPos, relVel, t);
     }
     /**
@@ -117,7 +117,7 @@ public class RigidBody {
     /**
      * @return the mass
      */
-    public float getMass() {
+    public double getMass() {
         return mass;
     }
 

@@ -21,7 +21,7 @@ public class CelestialBody extends RigidBody {
      * @param orbit Orbit of the object.
      * @param parent The celestial body the object is orbiting around.
      */
-    public CelestialBody(int mass, Vector3d facing, Vector3d angularVelocity, Orbit orbit, CelestialBody parent)
+    public CelestialBody(double mass, Vector3d facing, Vector3d angularVelocity, Orbit orbit, CelestialBody parent)
     {
         super(mass, facing, angularVelocity, orbit, parent);
     }
