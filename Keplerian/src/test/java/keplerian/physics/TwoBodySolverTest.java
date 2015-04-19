@@ -6,10 +6,9 @@
 
 package keplerian.physics;
 
-import java.math.BigDecimal;
-import java.math.MathContext;
-import java.math.RoundingMode;
 import java.util.ArrayList;
+import static keplerian.physics.Helper.closeEnough;
+import static keplerian.physics.Helper.toRadians;
 import org.junit.After;
 import org.junit.AfterClass;
 import static org.junit.Assert.*;
@@ -79,47 +78,10 @@ public class TwoBodySolverTest {
     public void tearDown() {
     }
 
-    private double toRadians(double deg)
-    {
-        return Math.PI/180.0*deg;
-    }
     
-    /**
-     * Takes in a double and desired precision, spits out a big decimal of desired precision.
-     * 
-     * Result is BigDecimal because the numbers will be compared later. Far easier than floating points.
-     * @param value The original value to be rounded.
-     * @param places The number of decimal places desired.
-     * @return A big decimal representing the value rounded to the desired number of decimal places.
-     */
-    public static BigDecimal round(double value, int places) {
-        if (places < 0) throw new IllegalArgumentException();
 
-        BigDecimal bd = new BigDecimal(value);
-        bd = bd.round(new MathContext(places, RoundingMode.HALF_UP));
-        return bd;
-    }
     
-    /**
-     * Compares two doubles to five decimal places.
-     * @param a double number one.
-     * @param b double number two.
-     * @return  Whether the numbers are approximately same or not.
-     */
-    private boolean closeEnough(double a, double b)
-    {
-        if(a == Double.NaN || b == Double.NaN)
-        {
-            return false;
-        }
-        BigDecimal roundA = round(a, 1);
-        BigDecimal roundB = round(b, 1);
-        
-        System.out.println("roundA: "+ roundA);
-        System.out.println("roundB: " + roundB);
-        
-        return roundA.equals(roundB);
-    }
+
     
     /**
      * Tests whether or not eccentricity is calculated correctly.
