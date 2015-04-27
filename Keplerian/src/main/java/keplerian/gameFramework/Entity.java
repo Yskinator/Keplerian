@@ -7,6 +7,8 @@
 package keplerian.gameFramework;
 
 import keplerian.physics.RigidBody;
+import keplerian.physics.Vector3d;
+import org.jsfml.graphics.Image;
 
 /**
  * Anything the user might be interested in.
@@ -24,6 +26,11 @@ public class Entity {
     public final static String NO_SPRITE = "NO_SPRITE";
     
     /**
+     * A constant used for entities without sprites, in other words entities that cannot be drawn.
+     */
+    public final static String BUILT_IN_IMAGE = "BUILT_IN_IMAGE";
+    
+    /**
      * The rigid body of the entity, if it has one.
      */
     private RigidBody rigidBody;
@@ -31,8 +38,12 @@ public class Entity {
     /**
      * ID used to find the correct sprite for the entity, if it has one.
      */
-    private String spriteID;
-
+    private String spriteID = NO_SPRITE;
+    
+    public Vector3d position;
+    
+    public Image image;
+    
     /**
      * Constructs a new entity with a rigid body.
      * @param rigidBody The rigidBody of the entity.
@@ -40,6 +51,14 @@ public class Entity {
     public Entity(RigidBody rigidBody) {
         this.rigidBody = rigidBody;
     }
+    
+    public Entity(Image image, Vector3d pos) {
+        this.position = pos;
+        this.image = image;
+        this.spriteID = BUILT_IN_IMAGE;
+    }
+    
+    
     
     
     
