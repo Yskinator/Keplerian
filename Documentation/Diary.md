@@ -60,3 +60,5 @@ while(!done)
 }
 eat();
 sleep();
+
+* ~9h(?): Kaikki yllämainittu on nyt toteutettu, mutta sijainti lasketaan väärin. Pahasti väärin. Yritän vielä hetken tutkia löydänkö vikaa. Jos en, menen nukkumaan ja katson aamulla uudestaan.
