@@ -1,6 +1,15 @@
 
 package keplerian.physics;
 
+import static java.lang.Math.asin;
+import static java.lang.Math.atan;
+import static java.lang.Math.atan2;
+import static java.lang.Math.cos;
+import static java.lang.Math.cosh;
+import static java.lang.Math.sin;
+import static java.lang.Math.sinh;
+import static java.lang.Math.sqrt;
+
 
 /**
  * Responsible for solving the two body problem to find the orbital elements.
@@ -259,12 +268,88 @@ public class TwoBodySolver {
      * @param e Eccentricity.
      * @return Eccentric anomaly.
      */
-    private static double findEccentricAnomaly(double v, double e)
+    private static double findEccentricAnomalyV(double v, double e)
     {
-        double E = e + Math.cos(v);
-        E = E/(1 + e * Math.cos(v));
-        E = Math.acos(E);
+        //Cosine formula seems to return -E instead of E. Using tangent formula instead.
+        /*double E1 = e + Math.cos(v);
+        E1 = E1/(1 + e * Math.cos(v));
+        E1 = Math.acos(E1);*/
+        double E2 = sqrt(1-e*e)*sin(v);
+        E2 = E2/(e + cos(v));
+        E2 = atan(E2);
+        /*double E3 = sqrt(1-e*e)*sin(v);
+        E3 = E3/(1+e*cos(v));
+        E3 = asin(E3);*/
+        return E2;
+    }
+    
+    /**
+     * calculates the eccentric anomaly from mean anomaly using Newton's method.
+     * @param m Mean anomaly.
+     * @param e Eccentricity.
+     * @return  Eccentric anomaly.
+     */
+    private static double findEccentricAnomalyM(double m, double e)
+    {
+        /*double EPrev, f0,f1,f2,f3,d1,d2,d3,E;
+        E = 0;
+        do
+        {
+            EPrev = E;
+            f0 = e*sinh(EPrev) - EPrev - m;
+            f1 = e*cosh(EPrev) - 1;
+            f2 = e*sinh(EPrev);
+            f3 = e*cosh(EPrev);
+            d1 = -f0/f1;
+            d2 = -f0/(f1 + 0.5*d1*f2);
+            d3 = -f0/(f1 + 0.5*d1*f2 + (1/6)*d2*f3);
+            E = EPrev+d3;
+        }while(Math.abs(E-EPrev)>1E-12);
+        return E;*/
+        double E, EPrev, f, df;
+        E = m;
+        do
+        {
+            EPrev = E;
+            f = EPrev - e*sin(EPrev) - m;
+            df = 1-cos(EPrev)*e;
+            E = EPrev - (f/df);
+        }while(Math.abs(E-EPrev)>1E-12);
         return E;
+    }
+    
+    private static double findTrueAnomalyE(double E, double e)
+    {
+        double v = sqrt(1-e*e)*sin(E);
+        v = v/(cos(E)-e);
+        v = atan(v);
+        return v;
+    }
+    
+    private static double findRadius(Orbit o)
+    {
+        //True anomaly needed.
+        double E = findEccentricAnomalyM(o.getM(), o.getE());
+        double r = o.getA() * (1 - o.getE() * Math.cos(E));
+        return r;
+    }
+    
+    public static Vector3d findPosition(Orbit o, double t)
+    {
+        o = predictOrbit(o, t);
+        double r = findRadius(o);
+        double E = findEccentricAnomalyM(o.getM(), o.getE());
+        double v = findTrueAnomalyE(E, o.getE());
+        Vector3d rv = Vector3d.mul(r, new Vector3d(cos(v), sin(v), 0));
+        
+        //Rotations:
+        double om = o.getOm();
+        double i = o.getI();
+        double w = o.getW();
+        rv = new Vector3d(rv.x*cos(-om) + rv.y*sin(-om), rv.x*sin(-om) + rv.y*cos(-om), rv.z);
+        rv = new Vector3d(rv.x, rv.y*cos(-i) + rv.z*sin(-i), rv.y*(-sin(-i)) + rv.z*cos(-i));
+        rv = new Vector3d(rv.x*cos(-w) + rv.y*sin(-w), rv.x*sin(-w) + rv.y*cos(-w), rv.z);
+        return rv;
     }
     
     /**
@@ -275,8 +360,8 @@ public class TwoBodySolver {
      */
     private static double findMeanAnomaly(double v, double e)
     {
-        double E = findEccentricAnomaly(v, e);
-        double M = E - (Math.E * Math.sin(E));
+        double E = findEccentricAnomalyV(v, e);
+        double M = E - (e * Math.sin(E));
         if(M < 0)
         {
             M = M + 2*Math.PI;
