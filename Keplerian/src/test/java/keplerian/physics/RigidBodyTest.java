@@ -61,7 +61,9 @@ public class RigidBodyTest {
     public void toRailsWorks()
     {
         rb.toRails(0);
-        assertTrue(closeEnough(rb.getOrbit(), oc));
+        
+        String error = "toRails works incorrectly. Received " + rb.getOrbit() + ", expected " + oc;
+        assertTrue(error, closeEnough(rb.getOrbit(), oc));
     }
     
     /* offRails not implemented.
