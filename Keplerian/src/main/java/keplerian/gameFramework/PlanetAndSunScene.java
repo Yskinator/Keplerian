@@ -48,7 +48,7 @@ public class PlanetAndSunScene extends GUIScene{
         Entity planet = entities.get(1);
         Orbit o = planet.getRigidBody().getOrbit();
         planet.position = TwoBodySolver.findPosition(o, t);
-        System.out.println(planet.position);
+        //System.out.println(planet.position);
         super.update();
     }
     
