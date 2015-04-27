@@ -340,16 +340,32 @@ public class TwoBodySolver {
         double r = findRadius(o);
         double E = findEccentricAnomalyM(o.getM(), o.getE());
         double v = findTrueAnomalyE(E, o.getE());
-        Vector3d rv = Vector3d.mul(r, new Vector3d(cos(v), sin(v), 0));
         
-        //Rotations:
         double om = o.getOm();
         double i = o.getI();
         double w = o.getW();
-        rv = new Vector3d(rv.x*cos(-om) + rv.y*sin(-om), rv.x*sin(-om) + rv.y*cos(-om), rv.z);
-        rv = new Vector3d(rv.x, rv.y*cos(-i) + rv.z*sin(-i), rv.y*(-sin(-i)) + rv.z*cos(-i));
-        rv = new Vector3d(rv.x*cos(-w) + rv.y*sin(-w), rv.x*sin(-w) + rv.y*cos(-w), rv.z);
-        return rv;
+        
+        double x, x1, x2, x3, y, y1, y2 ,y3, z, z1, z2 ,z3;
+        //Canonical position
+        x3 = r*cos(v);
+        y3 = r*sin(v);
+        z3 = 0;
+        
+        //Rotations
+        
+        x2 = x3*cos(w) - y3*sin(w);
+        y2 = x3*sin(w) + y3*cos(w);
+        z2 = z3;
+        
+        x1 = x2;
+        y1 = y2*cos(i);
+        z1 = y2*sin(i);
+        
+        x = x1*cos(om) - y1*sin(om);
+        y = x1*sin(om) + y1*cos(om);
+        z = z1;
+        
+        return new Vector3d(x,y,z);
     }
     
     /**
