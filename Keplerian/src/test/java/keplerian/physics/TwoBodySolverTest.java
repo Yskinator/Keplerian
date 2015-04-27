@@ -173,6 +173,15 @@ public class TwoBodySolverTest {
        assertTrue(error, closeEnough(mResult,mCorrect));
     }
     
+    private void testPosition(int i)
+    {
+        Vector3d rResult, rCorrect;
+        rResult = TwoBodySolver.findPosition(resultOrbits.get(i),0);
+        rCorrect = positions.get(i);
+        String error = "Position calculated incorrectly. Received " + rResult + ", expected " + rCorrect;
+        assertTrue(error, closeEnough(rResult, rCorrect));
+    }
+    
     /**
      * Test whether or not non-equatorial orbit's eccentricity is calculated correctly.
      */
@@ -227,6 +236,12 @@ public class TwoBodySolverTest {
         testMeanAnomaly(0);
     }
     
+    @Test
+    public void nonEquatorialPosition()
+    {
+        testPosition(0);
+    }
+    
     /**
      * Test whether or not equatorial orbit's eccentricity is calculated correctly.
      */
@@ -279,6 +294,12 @@ public class TwoBodySolverTest {
     public void equatorialMeanAnomaly()
     {
         testMeanAnomaly(1);
+    }
+    
+    @Test
+    public void equatorialPosition()
+    {
+        testPosition(1);
     }
     
 }
