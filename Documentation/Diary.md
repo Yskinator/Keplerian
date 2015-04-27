@@ -43,3 +43,20 @@ Elegantti ratkaisu usean eri kiertoradan testaukseen: testi xOrbit(), jossa x on
 Seuraavaksi joko kalastelen pisteitä piirtämällä (lopultakin) luokkakaavion, tai sitten implementoin sijainnin laskennan. Näyttäisi siltä, että joudun laskemaan numeerisesti true anomalyn mean anomalyn avulla, ja sen avulla sitten itse sijainnin ja nopeus vektorin.
 
 Todettakoon tässä vaiheessa, että kiertorataparametrit ovat itselleni täysin uusi tuttavuus. Suurin haaste projektissa lieneekin nykyiset fysiikan taitoni ylittävien kaavojen omaksuminen.
+
+##27.4
+
+Alle 24h aikaa demoon, operaatio loppukiri:
+* Laske true anomaly mean anomalysta numeerisesti.
+* Implementoi sijainnin/nopeuden laskenta.
+* Tee kiertoratasimulaatio: aurinko ja planeetta joka kiertää aurinkoa. Eli siis pelilooppi ja peliframework käyttöön.
+* Tee käyttöliittymä; yksinkertainen ikkuna jossa simulaatio näkyy.
+
+Aikaa aivan liian vähän, tehtävää aivan liian paljon. Challenge accepted!
+
+while(!done)
+{
+    keepCoding();
+}
+eat();
+sleep();
