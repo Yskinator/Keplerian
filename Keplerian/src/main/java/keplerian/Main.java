@@ -1,6 +1,10 @@
 package keplerian;
 
 import java.util.Scanner;
+import keplerian.gameFramework.GUI;
+import keplerian.gameFramework.PlanetAndSunScene;
+import keplerian.gameFramework.Scene;
+import static keplerian.gameFramework.Scene.NO_SCENE;
 import keplerian.physics.Orbit;
 import keplerian.physics.TwoBodySolver;
 import keplerian.physics.Vector3d;
@@ -15,7 +19,25 @@ import org.jsfml.window.event.Event;
 
 public class Main {
     
+    private static Scene scene = NO_SCENE;
     
+    public static void main(String[] args)
+    {
+        scene = new PlanetAndSunScene();
+        while(scene != NO_SCENE)
+        {
+            //Gets input, updates the game, shows the result.
+            scene.processInput();
+            scene.update();
+            scene.show();
+            
+            //Changes scenes if necessary.
+            scene = scene.getCurrScene();
+        }
+    }
+    
+    
+    /*
     public static void main(String[] args)
     {
         Scanner scan = new Scanner(System.in);
@@ -40,9 +62,9 @@ public class Main {
         Orbit orbit = TwoBodySolver.findOrbit(mass, r, vel, 0);
         System.out.println("Resulting orbit: " + orbit);
         
-    }
+    }*/
     
-    /*private static RenderWindow window;
+    /*
 
     public static void main(String[] args)
     {
