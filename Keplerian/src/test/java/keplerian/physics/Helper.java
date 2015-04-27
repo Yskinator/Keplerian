@@ -51,15 +51,13 @@ public class Helper {
     */
     public static boolean closeEnough(double a, double b)
     {
+        int accuracy = 1;
         if(a == Double.NaN || b == Double.NaN)
         {
             return false;
         }
-        BigDecimal roundA = round(a, 1);
-        BigDecimal roundB = round(b, 1);
-        
-        System.out.println("roundA: "+ roundA);
-        System.out.println("roundB: " + roundB);
+        BigDecimal roundA = round(a, accuracy);
+        BigDecimal roundB = round(b, accuracy);
         
         return roundA.equals(roundB);
     }
@@ -81,6 +79,15 @@ public class Helper {
         boolean wClose = closeEnough(a.getW(), b.getW());
         
         return aClose && eClose && iClose && mClose && omClose && wClose;
+    }
+    
+    public static boolean closeEnough(Vector3d a, Vector3d b)
+    {
+        boolean xClose = closeEnough(a.x, b.x);
+        boolean yClose = closeEnough(a.y, b.y);
+        boolean zClose = closeEnough(a.z, b.z);
+        
+        return xClose && yClose && zClose;
     }
     
 }
