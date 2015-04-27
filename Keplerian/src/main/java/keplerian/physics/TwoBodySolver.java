@@ -1,6 +1,7 @@
 
 package keplerian.physics;
 
+import static java.lang.Math.PI;
 import static java.lang.Math.asin;
 import static java.lang.Math.atan;
 import static java.lang.Math.atan2;
@@ -114,7 +115,6 @@ public class TwoBodySolver {
         {
             v = 2*Math.PI - v;
         }
-        
         return v;
     }
 
@@ -365,7 +365,21 @@ public class TwoBodySolver {
         y = x1*sin(om) + y1*cos(om);
         z = z1;
         
+        
+        
         return new Vector3d(x,y,z);
+    }
+    
+    /**
+     * Calculates the orbital period of the given orbit.
+     * @param o Orbit.
+     * @return Orbital period.
+     */
+    public static double findOrbitalPeriod(Orbit o)
+    {
+        double a = o.getA();
+        double mu = o.getMu();
+        return 2*PI*sqrt(a*a*a/mu);
     }
     
     /**
