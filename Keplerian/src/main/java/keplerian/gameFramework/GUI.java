@@ -76,10 +76,7 @@ public class GUI implements UserInterface {
                 {
                     Sprite s = new Sprite(textures.get(e.getSpriteID()));
                     s.setPosition(new Vector2f((float)e.position.x, (float)e.position.y));
-                    if(!fromFile)
-                    {
-                        s.setOrigin(5000, 5000);
-                    }
+                    s.setOrigin(Vector2f.div(new Vector2f(s.getTexture().getSize()),2));
                     sprites.put(e.getSpriteID(), s);
                 }
             }
