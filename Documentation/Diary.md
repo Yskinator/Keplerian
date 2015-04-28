@@ -62,3 +62,9 @@ eat();
 sleep();
 
 * ~9h(?): Kaikki yllämainittu on nyt toteutettu, mutta sijainti lasketaan väärin. Pahasti väärin. Yritän vielä hetken tutkia löydänkö vikaa. Jos en, menen nukkumaan ja katson aamulla uudestaan.
+
+
+##28.4
+* ~3h: Sijainnin laskenta korjattu. Nopeuden laskenta implementoitu. Käyttöliittymään lisätty pikaisesti ajan nopeutus/hidastus/suunnan muuttaminen ja zoomaus. Yhteensopivuus linux läppärin kanssa varmistettu.
+
+Täten julistan operaatio loppukirin onnistuneeksi. Ohjelma osaa nyt simuloida kiertorataa, joten demossa on jotain näytettävää. Toki lopullista palautusta varten on vielä paljon tehtävää, käyttöliittymä kun on todella pikaisesti kokoon kyhätty ja muutenkin fysiikkamoottoria lukuun ottamatta ohjelma hieman puutteellinen, mutta demottavaa on, mikä on aikaisempaan nähden suuri parannus.
