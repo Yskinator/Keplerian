@@ -336,13 +336,51 @@ public class TwoBodySolver {
         return r;
     }
     
+    public static Vector3d findVelocity(Orbit o, double t)
+    {
+        o = predictOrbit(o,t);
+        
+        double a = o.getA();
+        double mu = o.getMu();
+        double e = o.getE();
+        double E = findEccentricAnomalyM(o.getM(),e);
+        double v = findTrueAnomalyE(E,e);
+        double w = o.getW();
+        double i = o.getI();
+        double om = o.getOm();
+        
+        double vx3, vx2, vx1, vx, vy3, vy2, vy1, vy, vz3, vz2, vz1, vz;
+        
+        
+        //canonical velocity
+        vx3 = -sqrt(mu/(a*(1-e*e)))*sin(v);
+        vy3 = sqrt(mu/(a*(1-e*e)))*(e+cos(v));
+        vz3 = 0;
+        
+        //Rotations
+        vx2 = vx3*cos(w)-vy3*sin(w);
+        vy2 = vx3*sin(w)+vy3*cos(w);
+        vz2 = vz3;
+        
+        vx1 = vx2;
+        vy1 = vy2*cos(i);
+        vz1 = vy2*sin(i);
+        
+        vx = vx1*cos(om)-vy1*sin(om);
+        vy = vx1*sin(om)+vy1*cos(om);
+        vz=vz1;
+        
+        return new Vector3d(vx, vy, vz);
+        
+    }
+    
     public static Vector3d findPosition(Orbit o, double t)
     {
         //Predict orbit at time t
         o = TwoBodySolver.predictOrbit(o, t);
         
         //Solve location at time t
-        double r = findRadius(o);
+        //double r = findRadius(o);
         double E = findEccentricAnomalyM(o.getM(), o.getE());
         double v = findTrueAnomalyE(E, o.getE());
         //Checked this far, should be correct. Errors below!

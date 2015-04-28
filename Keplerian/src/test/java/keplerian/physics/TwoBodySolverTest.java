@@ -182,6 +182,15 @@ public class TwoBodySolverTest {
         assertTrue(error, closeEnough(rResult, rCorrect));
     }
     
+    private void testVelocity(int i)
+    {
+        Vector3d vResult, vCorrect;
+        vResult = TwoBodySolver.findVelocity(resultOrbits.get(i),0);
+        vCorrect = velocities.get(i);
+        String error = "Velocity calculated incorrectly. Received " + vResult + ", expected " + vCorrect;
+        assertTrue(error, closeEnough(vResult, vCorrect));
+    }
+    
     /**
      * Test whether or not non-equatorial orbit's eccentricity is calculated correctly.
      */
@@ -242,6 +251,12 @@ public class TwoBodySolverTest {
         testPosition(0);
     }
     
+    @Test
+    public void nonEquatorialVelocity()
+    {
+        testVelocity(0);
+    }
+    
     /**
      * Test whether or not equatorial orbit's eccentricity is calculated correctly.
      */
@@ -300,6 +315,12 @@ public class TwoBodySolverTest {
     public void equatorialPosition()
     {
         testPosition(1);
+    }
+    
+    @Test
+    public void equatorialVelocity()
+    {
+        testVelocity(1);
     }
     
 }
