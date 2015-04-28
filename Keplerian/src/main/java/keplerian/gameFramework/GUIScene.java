@@ -22,7 +22,7 @@ public class GUIScene extends Scene {
     protected void initEntities()
     {
         GUI gui = (GUI) UI;
-        gui.init(entities);
+        gui.init(entities, (PlanetAndSunScene)this);
     }
     
     @Override

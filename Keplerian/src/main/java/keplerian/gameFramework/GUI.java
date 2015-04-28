@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.HashMap;
+import keplerian.physics.Vector3d;
 import org.jsfml.graphics.Color;
 import org.jsfml.graphics.Image;
 import org.jsfml.graphics.RenderWindow;
@@ -40,10 +41,12 @@ public class GUI implements UserInterface {
      * When a texture is used, it's fetched from here.
      */
     private HashMap<String, Texture> textures;
+    private PlanetAndSunScene scene;
     
-    public void init(ArrayList<Entity> entities)
+    public void init(ArrayList<Entity> entities, PlanetAndSunScene scene)
     {
         textures = new HashMap<>();
+        this.scene = scene;
         window = new RenderWindow();
         window.create(VideoMode.getFullscreenModes()[0], "Keplerian", WindowStyle.DEFAULT);
         View view = new View();
@@ -62,7 +65,6 @@ public class GUI implements UserInterface {
                     {
                         i++;
                     }
-                    e.setSpriteID(e.getSpriteID() + i);
                     convertToTexture(e.getSpriteID(), e.image);
                     
                 }
@@ -121,19 +123,18 @@ public class GUI implements UserInterface {
     
     public void convertToTexture(String name, Image image)
     {
-        if(!textures.containsKey(name))
+        
+        Texture tx = new Texture();
+        try
         {
-            Texture tx = new Texture();
-            try
-            {
-                tx.loadFromImage(image);
-                textures.put(name, tx);
-            } catch(Exception e)
-            {
-                //Failed to convert to texture.
-                System.out.println("Texture conversion failed! " + name);
-            }
+            tx.loadFromImage(image);
+            textures.put(name, tx);
+        } catch(Exception e)
+        {
+            //Failed to convert to texture.
+            System.out.println("Texture conversion failed! " + name);
         }
+        
     }
     
     public boolean windowClosed()
@@ -191,6 +192,18 @@ public class GUI implements UserInterface {
                 if(ke.key == Key.ESCAPE)
                 {
                     close();
+                }
+                if(ke.key == Key.ADD)
+                {
+                    scene.multTMult(1.2f);
+                }
+                if(ke.key == Key.SUBTRACT)
+                {
+                    scene.multTMult(0.8f);
+                }
+                if(ke.key == Key.R)
+                {
+                    scene.multTMult(-1.0f);
                 }
             }
             if(e.type == Event.Type.CLOSED)

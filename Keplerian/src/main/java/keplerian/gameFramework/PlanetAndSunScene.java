@@ -21,14 +21,14 @@ import org.jsfml.system.Time;
  */
 public class PlanetAndSunScene extends GUIScene{
     
-    private Clock clock = new Clock();
+    private final Clock clock = new Clock();
     double t;
     private float tMult = 1000000;
     
     public PlanetAndSunScene()
     {
         super();
-        entities = new ArrayList<Entity>();
+        entities = new ArrayList<>();
         makeSun();
         makePlanet();
         plotPlanetOrbit();
@@ -36,6 +36,11 @@ public class PlanetAndSunScene extends GUIScene{
         clock.restart();
         t = 0;
         
+    }
+    
+    public void multTMult(float m)
+    {
+        tMult = tMult*m;
     }
     
     @Override
@@ -71,7 +76,9 @@ public class PlanetAndSunScene extends GUIScene{
         Vector3d unimportant = new Vector3d(0,0,0);
         CelestialBody sun = (CelestialBody)entities.get(0).getRigidBody();
         Entity planet = new Entity(new RigidBody(m,r,vel,unimportant,unimportant,sun));
-        planet.getRigidBody().toRails(0);
+        planet.getRigidBody().toRails(t);
+        planet.getRigidBody().offRails(t);
+        planet.getRigidBody().toRails(t);
         
         planet.setSpriteID("planet.png");
         planet.position = r;
@@ -83,4 +90,5 @@ public class PlanetAndSunScene extends GUIScene{
         Entity orbit = new Entity(OrbitPlotter.plotOrbit(entities.get(1).getRigidBody().getOrbit(), Color.RED), new Vector3d(0,0,0));
         entities.add(orbit);
     }
+    
 }

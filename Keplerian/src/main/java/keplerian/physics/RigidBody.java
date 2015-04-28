@@ -106,10 +106,10 @@ public class RigidBody {
      * Removes the object from orbit and finds its velocity and position.
      * @param t The current time. Needed to calculate the position and velocity.
      */
-    public void offRails(float t)
+    public void offRails(double t)
     {
-        relVel = orbit.findOrbitalVelocity(t);
-        relPos = orbit.findPosition(t);
+        relVel = TwoBodySolver.findVelocity(orbit, t);
+        relPos = TwoBodySolver.findPosition(orbit, t);
         
         this.orbit = NO_ORBIT;
     }
@@ -147,6 +147,11 @@ public class RigidBody {
      */
     public Vector3d getRelPos() {
         return relPos;
+    }
+    
+    public void setRelVel(Vector3d relVel)
+    {
+        this.relVel = relVel;
     }
 
     /**

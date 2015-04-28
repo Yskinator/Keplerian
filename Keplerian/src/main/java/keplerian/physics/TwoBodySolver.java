@@ -383,7 +383,6 @@ public class TwoBodySolver {
         //double r = findRadius(o);
         double E = findEccentricAnomalyM(o.getM(), o.getE());
         double v = findTrueAnomalyE(E, o.getE());
-        //Checked this far, should be correct. Errors below!
         
         double om = o.getOm();
         double i = o.getI();

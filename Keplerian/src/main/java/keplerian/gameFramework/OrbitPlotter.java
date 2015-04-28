@@ -16,7 +16,7 @@ import org.jsfml.graphics.Image;
  * @author Ville-Matti
  */
 public class OrbitPlotter {
-    private static final int dotCount = 1000000;
+    private static final int dotCount = 100000;
     
     public static Image plotOrbit(Orbit o, Color c)
     {
@@ -29,7 +29,13 @@ public class OrbitPlotter {
         for(int i = 0; i < dotCount; i++)
         {
             pos = TwoBodySolver.findPosition(o, t);
-            graph.setPixel((int)pos.x+5000, (int)pos.y+5000, c);
+            int x = (int)pos.x+5000;
+            int y = (int)pos.y+5000;
+            if(x < 10000 && x > 0 && y < 10000 && y > 0)
+            {
+                graph.setPixel(x, y, c);
+            }
+            
             t = t + T/dotCount;
         }
         return graph;
