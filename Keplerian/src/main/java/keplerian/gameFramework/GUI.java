@@ -79,6 +79,10 @@ public class GUI implements UserInterface {
                     Sprite s = new Sprite(textures.get(e.getSpriteID()));
                     s.setPosition(new Vector2f((float)e.position.x, (float)e.position.y));
                     s.setOrigin(Vector2f.div(new Vector2f(s.getTexture().getSize()),2));
+                    if(!fromFile)
+                    {
+                        s.scale(new Vector2f(5,5));
+                    }
                     sprites.put(e.getSpriteID(), s);
                 }
             }
@@ -193,17 +197,31 @@ public class GUI implements UserInterface {
                 {
                     close();
                 }
-                if(ke.key == Key.ADD)
+                if(ke.key == Key.Z)
                 {
                     scene.multTMult(1.2f);
                 }
-                if(ke.key == Key.SUBTRACT)
+                if(ke.key == Key.X)
                 {
                     scene.multTMult(0.8f);
                 }
                 if(ke.key == Key.R)
                 {
                     scene.multTMult(-1.0f);
+                }
+                if(ke.key == Key.PERIOD)
+                {
+                    window.getView();
+                    View view = new View(window.getView().getCenter(), window.getView().getSize());
+                    view.zoom(1.2f);
+                    window.setView(view);
+                }
+                if(ke.key == Key.COMMA)
+                {
+                    window.getView();
+                    View view = new View(window.getView().getCenter(), window.getView().getSize());
+                    view.zoom(0.8f);
+                    window.setView(view);
                 }
             }
             if(e.type == Event.Type.CLOSED)

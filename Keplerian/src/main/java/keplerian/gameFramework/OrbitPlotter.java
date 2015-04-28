@@ -21,7 +21,7 @@ public class OrbitPlotter {
     public static Image plotOrbit(Orbit o, Color c)
     {
         Image graph = new Image();
-        graph.create(10000,10000, Color.TRANSPARENT);
+        graph.create(5000,5000, Color.TRANSPARENT);
         
         double T = TwoBodySolver.findOrbitalPeriod(o);
         double t = 0;
@@ -29,9 +29,9 @@ public class OrbitPlotter {
         for(int i = 0; i < dotCount; i++)
         {
             pos = TwoBodySolver.findPosition(o, t);
-            int x = (int)pos.x+5000;
-            int y = (int)pos.y+5000;
-            if(x < 10000 && x > 0 && y < 10000 && y > 0)
+            int x = (int)pos.x/5+2500;
+            int y = (int)pos.y/5+2500;
+            if(x < 5000 && x > 0 && y < 5000 && y > 0)
             {
                 graph.setPixel(x, y, c);
             }
