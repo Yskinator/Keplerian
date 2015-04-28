@@ -81,7 +81,7 @@ public class GUI implements UserInterface {
                     s.setOrigin(Vector2f.div(new Vector2f(s.getTexture().getSize()),2));
                     if(!fromFile)
                     {
-                        s.scale(new Vector2f(5,5));
+                        s.scale(new Vector2f(3,3));
                     }
                     sprites.put(e.getSpriteID(), s);
                 }
@@ -159,8 +159,9 @@ public class GUI implements UserInterface {
         if(window.isOpen()) 
         {
             window.clear(Color.BLACK);
-            for(Entity e : entities)
+            for(int i = entities.size()-1; i >= 0; i--)
             {
+                Entity e = entities.get(i);
                 if(sprites.containsKey(e.getSpriteID()))
                 {
                     window.draw(sprites.get(e.getSpriteID()));

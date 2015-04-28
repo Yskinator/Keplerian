@@ -29,8 +29,8 @@ public class OrbitPlotter {
         for(int i = 0; i < dotCount; i++)
         {
             pos = TwoBodySolver.findPosition(o, t);
-            int x = (int)pos.x/5+2500;
-            int y = (int)pos.y/5+2500;
+            int x = (int)pos.x/3+2500;
+            int y = (int)pos.y/3+2500;
             if(x < 5000 && x > 0 && y < 5000 && y > 0)
             {
                 graph.setPixel(x, y, c);
