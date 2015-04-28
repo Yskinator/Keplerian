@@ -292,7 +292,8 @@ public class TwoBodySolver {
     private static double findEccentricAnomalyM(double m, double e)
     {
         /*double EPrev, f0,f1,f2,f3,d1,d2,d3,E;
-        E = 0;
+        
+        E = m;
         do
         {
             EPrev = E;
@@ -306,6 +307,7 @@ public class TwoBodySolver {
             E = EPrev+d3;
         }while(Math.abs(E-EPrev)>1E-12);
         return E;*/
+        
         double E, EPrev, f, df;
         E = m;
         do
@@ -336,19 +338,25 @@ public class TwoBodySolver {
     
     public static Vector3d findPosition(Orbit o, double t)
     {
-        o = predictOrbit(o, t);
+        //Predict orbit at time t
+        o = TwoBodySolver.predictOrbit(o, t);
+        
+        //Solve location at time t
         double r = findRadius(o);
         double E = findEccentricAnomalyM(o.getM(), o.getE());
         double v = findTrueAnomalyE(E, o.getE());
+        //Checked this far, should be correct. Errors below!
         
         double om = o.getOm();
         double i = o.getI();
         double w = o.getW();
+        double a = o.getA();
+        double e = o.getE();
         
         double x, x1, x2, x3, y, y1, y2 ,y3, z, z1, z2 ,z3;
         //Canonical position
-        x3 = r*cos(v);
-        y3 = r*sin(v);
+        x3 = a*(cos(E)-e);
+        y3 = a*sqrt(1-e*e)*sin(E);
         z3 = 0;
         
         //Rotations
