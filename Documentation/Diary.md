@@ -1,4 +1,4 @@
-#Tuntikirjanpito
+﻿#Tuntikirjanpito
 
 ##13.3
 * 45 min: projektin luominen edellisestä projektista tuttuun tapaan. 
@@ -68,3 +68,17 @@ sleep();
 * ~3h: Sijainnin laskenta korjattu. Nopeuden laskenta implementoitu. Käyttöliittymään lisätty pikaisesti ajan nopeutus/hidastus/suunnan muuttaminen ja zoomaus. Yhteensopivuus linux läppärin kanssa varmistettu.
 
 Täten julistan operaatio loppukirin onnistuneeksi. Ohjelma osaa nyt simuloida kiertorataa, joten demossa on jotain näytettävää. Toki lopullista palautusta varten on vielä paljon tehtävää, käyttöliittymä kun on todella pikaisesti kokoon kyhätty ja muutenkin fysiikkamoottoria lukuun ottamatta ohjelma hieman puutteellinen, mutta demottavaa on, mikä on aikaisempaan nähden suuri parannus.
+
+##3.5
+* 1h: Loppubyrokratia.
+
+Kuvauksessa antamani tavoitteet olivat
+
+* Laske sijainti ajan ja kiertorataparamentrien avulla.
+* Laske kiertorata sijainnin ja nopeuden avulla.
+* Nopeuta, hidasta, tai käännä kokonaan ajan suunta.
+* Selviä siirtymästä kappaleen vaikutuspiiristä toiseen.
+* Ennusta ja piirrä kappaleen rataa.
+* Mahdollisesti yksinkertainen käänny/kiihdytä raketti testausta varten.
+
+Näistä kaikki paitsi käänny/kiihdytä raketti sekä vaikutuspiiristä toiseen siirtyminen saavutettiin, ja raketin toteuttaminen olisi ollut suhteellisen yksinkertaista. Kaiken kaikkiaan voin olla melko tyytyväinen. Ohjelman keplerian.physics osio on varsin mallikkaasti toteutettu, käyttäen hyväksi itselleni ennestään täysin tuntematonta matikkaa. Muuhun osaan ohjelmasta en ole täysin tyytyväinen - suunnitelmana oli uusio koko käyttöliittymä osio, mutta minkäs sille enää tässä vaiheessa mahtaa.
